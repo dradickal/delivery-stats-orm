@@ -1,4 +1,4 @@
-import { Entity, ManyToMany, ManyToOne, Collection, PrimaryKey, Property, types } from '@mikro-orm/core';
+import { Entity, ManyToMany, ManyToOne, Collection, PrimaryKey, Property, types, LoadStrategy } from '@mikro-orm/core';
 import { Offer } from './offer.timed.entity.js';
 import { OfferDrive } from './offerDrive.timed.entity.js';
 
@@ -48,7 +48,7 @@ export class OfferOrder {
     @Property({ type: types.float, unsigned: true })
     gh_distance!: number;
 
-    @ManyToMany({ entity: () => OfferDrive, owner: true, eager: true })
+    @ManyToMany({ entity: () => OfferDrive, owner: true, eager: true, strategy: LoadStrategy.JOINED })
     drives =  new Collection<OfferDrive>(this);
 
     @ManyToOne({ entity: () => Offer })
