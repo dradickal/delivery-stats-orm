@@ -7,7 +7,10 @@
   "scripts": {
     "build": "module",
     "start": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/server.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "db-create-schema": "npx mikro-orm-esm schema:create --dump > createSchema.sql",
+    "db-update-schema": "npx mikro-orm-esm schema:update --dump > updateSchema.sql",
+    "db-drop-schema": "npx mikro-orm-esm schema:drop --dump > dropSchema.sql"
   },
   "author": "",
   "license": "ISC",
