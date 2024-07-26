@@ -1,5 +1,26 @@
-import { Entity } from "@mikro-orm/core";
+import { Entity, ManyToOne, Property, types, Ref } from "@mikro-orm/core";
 import { TimedEntity } from "../common/timed.entity.js";
+import { Weekday } from "../common/weekday.label.entity.js";
+import { ServiceLabel } from "../common/service.label.entity.js";
+import { DrivingShift } from "./drivingShift.timed.entity.js";
 
 @Entity()
-export class ScheduledShift extends TimedEntity {};
+export class ScheduledShift extends TimedEntity {
+    @Property({ type: types.date })
+    date!: Date;
+
+    @Property({ type: types.boolean, default: false })
+    absent!: boolean;
+
+    @Property({ type: types.boolean, default: false })
+    cancelled!: boolean;
+
+    @ManyToOne({ entity: () => Weekday, ref: true })
+    weekday!: Ref<Weekday>;
+
+    @ManyToOne({ entity: () => ServiceLabel, ref: true })
+    service!: Ref<ServiceLabel>;
+
+    @ManyToOne({ entity: () => DrivingShift, ref: true, nullable: true, default: null })
+    drivingShift!: Ref<DrivingShift>; 
+};
