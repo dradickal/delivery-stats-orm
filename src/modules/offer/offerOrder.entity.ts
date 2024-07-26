@@ -49,7 +49,7 @@ export class OfferOrder {
     @Property({ type: types.float, unsigned: true })
     gh_distance!: number;
 
-    @ManyToMany({ entity: () => OfferDrive, owner: true, eager: true, strategy: LoadStrategy.JOINED })
+    @ManyToMany({ entity: () => OfferDrive, owner: true, eager: true, pivotTable: 'drives_pivot' })
     drives =  new Collection<OfferDrive>(this);
 
     @ManyToOne({ entity: () => Offer })

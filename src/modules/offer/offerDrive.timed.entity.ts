@@ -15,6 +15,6 @@ export class OfferDrive extends TimedEntity {
     @ManyToOne({ type: types.tinyint, entity: () => Destination })
     destination!: Destination;
 
-    @ManyToMany({ entity: () => OfferOrder })
+    @ManyToMany({ entity: () => OfferOrder, mappedBy: 'drives' })
     orders!: OfferOrder;
 }
