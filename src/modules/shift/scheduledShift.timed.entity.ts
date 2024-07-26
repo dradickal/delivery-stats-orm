@@ -15,7 +15,7 @@ export class ScheduledShift extends TimedEntity {
     @Property({ type: types.boolean, default: false })
     cancelled!: boolean;
 
-    @ManyToOne({ entity: () => Weekday, ref: true })
+    @ManyToOne<ScheduledShift, Weekday>({ entity: () => Weekday, ref: true, generated: col => `DAYOFWEEK(${col.date}) stored` })
     weekday!: Ref<Weekday>;
 
     @ManyToOne({ entity: () => ServiceLabel, ref: true })
