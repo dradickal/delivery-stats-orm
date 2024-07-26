@@ -1,7 +1,8 @@
-import { Entity, ManyToMany, ManyToOne, Collection, PrimaryKey, Property, types, LoadStrategy } from '@mikro-orm/core';
+import { Entity, ManyToMany, ManyToOne, Collection, PrimaryKey, Property, types, Ref } from '@mikro-orm/core';
 import { Offer } from './offer.timed.entity.js';
 import { OfferDrive } from './offerDrive.timed.entity.js';
 import { MonetaryType } from '../common/MonetaryType.js';
+import { Business } from '../business/business.entity.js';
 
 
 @Entity()
@@ -13,37 +14,37 @@ export class OfferOrder {
     @Property({ type: MonetaryType, unsigned: true })
     totalPay!: number;
 
-    @Property({ columnType: 'decimal(4,2)', unsigned: true })
+    @Property({ type: MonetaryType, unsigned: true })
     basePay!: number;
 
-    @Property({ columnType: 'decimal(4,2)', unsigned: true, default: 0 })
+    @Property({ type: MonetaryType, unsigned: true, default: 0 })
     bonusPay!: number;
 
-    @Property({ columnType: 'decimal(4,2)', unsigned: true, default: 0 })
+    @Property({ type: MonetaryType, unsigned: true, default: 0 })
     appTip!: number;
 
-    @Property({ columnType: 'decimal(4,2)', unsigned: true, default: 0 })
+    @Property({ type: MonetaryType, unsigned: true, default: 0 })
     cashTip!: number;
 
     @Property({ type: types.tinyint, unsigned: true, nullable: true, default: null })
     itemsQuantity!: number | null;
 
     @Property({ type: types.tinyint, unsigned: true, nullable: true, default: null })
-    itemsCount!: number;
+    itemsCount!: number | null;
 
     @Property({ type: types.time, nullable: true, default: null })
-    orderPlaced!: string;
+    orderPlaced!: string | null;
 
     @Property({ type: types.time, nullable: true, default: null })
-    orderETA!: string;
+    orderETA!: string | null;
 
     @Property({ type: types.time, nullable: true, default: null })
-    ghPickupTime!: string;
+    ghPickupTime!: string | null;
 
     @Property({ type: types.time, nullable: true, default: null })
-    pickupTime!: string;
+    pickupTime!: string | null;
 
-    @Property({ type: types.boolean })
+    @Property({ type: types.boolean, default: false })
     pickupDelay!: boolean;
 
     @Property({ type: types.float, unsigned: true })
@@ -52,8 +53,9 @@ export class OfferOrder {
     @ManyToMany({ entity: () => OfferDrive, owner: true, eager: true, pivotTable: 'drives_pivot' })
     drives =  new Collection<OfferDrive>(this);
 
-    @ManyToOne({ entity: () => Offer })
-    offer!: Offer;
+    @ManyToOne({ entity: () => Offer, ref: true })
+    offer!: Ref<Offer>;
 
-    // Add Business Relationship
+    @ManyToOne({ entity: () => Business, ref: true })
+    business!: Ref<Business>;
 }
