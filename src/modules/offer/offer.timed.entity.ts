@@ -12,10 +12,10 @@ export class Offer extends TimedEntity {
     @Property({ type: types.float, unsigned: true })
     offerDistance!: number;
 
-    @Property({ type: MonetaryType, unsigned: true, nullable: true })
-    offerPay!: number | null;
+    @Property({ type: MonetaryType, unsigned: true, default: 0 })
+    offerPay!: number;
 
-    @Property({ type: MonetaryType, unsigned: true })
+    @Property({ type: MonetaryType, unsigned: true, default: 0 })
     totalPay!: number;
 
     @Property({ type: types.boolean, default: false })
