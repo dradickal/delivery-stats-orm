@@ -5,21 +5,21 @@ export class Business {
     @PrimaryKey()
     id!: number;
 
-    @Property({ type: types.string, length: 50 })
+    @Property({ type: types.string, length: 100 })
     name!: string;
 
-    @Property({ type: types.string, length: 75 })
+    @Property({ type: types.string, length: 150 })
     address!: string;
 
-    @Property({ type: types.string, length: 20 })
+    @Property({ type: types.string, length: 40 })
     street!: string;
 
-    @Property({ type: types.string, length: 20 })
+    @Property({ type: types.string, length: 40 })
     crossStreet!: string;
 
     @Property<Business>({ 
         type: types.string, 
-        length: 100, 
+        length: 200, 
         generated: cols => `concat(${cols.name}, ' (', ${cols.street}, ' and ', ${cols.crossStreet}, ' )') stored` 
     })
     label!: string;
