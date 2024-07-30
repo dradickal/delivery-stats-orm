@@ -1,7 +1,10 @@
 set names utf8mb4;
 set foreign_key_checks = 0;
 
-create table `business` (`id` int unsigned not null auto_increment primary key, `name` varchar(50) not null, `address` varchar(75) not null, `street` varchar(20) not null, `cross_street` varchar(20) not null, `label` varchar(100) generated always as concat(name, ' (', street, ' and ', cross_street, ' )') stored) default character set utf8mb4 engine = InnoDB;
+create table `activity_label` (`id` int unsigned not null auto_increment primary key, `name` varchar(15) not null, `friendly_name` varchar(40) not null) default character set utf8mb4 engine = InnoDB;
+alter table `activity_label` add unique `activity_label_name_unique`(`name`);
+
+create table `business` (`id` int unsigned not null auto_increment primary key, `name` varchar(100) not null, `address` varchar(150) not null, `street` varchar(40) not null, `cross_street` varchar(40) not null, `label` varchar(200) generated always as concat(name, ' (', street, ' and ', cross_street, ' )') stored) default character set utf8mb4 engine = InnoDB;
 
 create table `destination` (`id` int unsigned not null auto_increment primary key, `name` varchar(255) not null) default character set utf8mb4 engine = InnoDB;
 
@@ -12,9 +15,11 @@ create table `offer_status` (`id` int unsigned not null auto_increment primary k
 
 create table `service_label` (`id` int unsigned not null auto_increment primary key, `name` varchar(255) not null) default character set utf8mb4 engine = InnoDB;
 
+create table `stored_images` (`filename` varchar(180) not null, `filepath` varchar(250) not null, `associated_date` date null default null, `upload_date` datetime not null, `processed_date` datetime null default null, `activity_label` varchar(15) not null default null, `ocr_results` json not null, primary key (`filename`)) default character set utf8mb4 engine = InnoDB;
+
 create table `vehicle_stats` (`id` int unsigned not null auto_increment primary key) default character set utf8mb4 engine = InnoDB;
 
-create table `weekday` (`id` int unsigned not null auto_increment primary key, `name` varchar(255) not null, `short_name` varchar(4) not null) default character set utf8mb4 engine = InnoDB;
+create table `weekday` (`id` int unsigned not null auto_increment primary key, `name` varchar(255) not null, `short_name` varchar(4) not null, `sort_mon` tinyint not null) default character set utf8mb4 engine = InnoDB;
 
 create table `driving_shift` (`id` int unsigned not null auto_increment primary key, `start_time` time not null, `end_time` time not null, `duration_m` smallint unsigned not null, `date` date not null, `active_duration_m` smallint unsigned not null default 0, `duration_diff_m` smallint unsigned not null default 0, `total_pay` numeric(6,2) not null default 0, `app_pay` numeric(6,2) not null default 0, `bonus_pay` numeric(6,2) not null default 0, `customer_tip` numeric(6,2) not null default 0, `contribution_pay` numeric(6,2) not null default 0, `vehicle_stats_id` int unsigned not null, `weekday_id` tinyint generated always as DAYOFWEEK(date) stored unsigned, `service_id` tinyint unsigned not null) default character set utf8mb4 engine = InnoDB;
 alter table `driving_shift` add index `driving_shift_vehicle_stats_id_index`(`vehicle_stats_id`);
