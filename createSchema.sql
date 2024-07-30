@@ -4,37 +4,33 @@ set foreign_key_checks = 0;
 create table `activity_label` (`id` int unsigned not null auto_increment primary key, `name` varchar(15) not null, `friendly_name` varchar(40) not null) default character set utf8mb4 engine = InnoDB;
 alter table `activity_label` add unique `activity_label_name_unique`(`name`);
 
-create table `business` (`id` int unsigned not null auto_increment primary key, `name` varchar(100) not null, `address` varchar(150) not null, `street` varchar(40) not null, `cross_street` varchar(40) not null, `label` varchar(200) generated always as concat(name, ' (', street, ' and ', cross_street, ' )') stored) default character set utf8mb4 engine = InnoDB;
+create table `business` (`id` int unsigned not null auto_increment primary key, `name` varchar(100) not null, `address` varchar(150) not null, `street` varchar(40) not null, `cross_street` varchar(40) not null, `label` varchar(200) generated always as (CONCAT(`name`, ' (', `street`, ' and ', `cross_street`, ' )')) stored) default character set utf8mb4 engine = InnoDB;
 
 create table `destination` (`id` int unsigned not null auto_increment primary key, `name` varchar(255) not null) default character set utf8mb4 engine = InnoDB;
 
-create table `offer_drive` (`id` int unsigned not null auto_increment primary key, `start_time` time not null, `end_time` time not null, `duration_m` smallint unsigned not null, `map_distance` float not null, `map_duration` smallint unsigned not null, `destination_id` tinyint unsigned not null) default character set utf8mb4 engine = InnoDB;
+create table `offer_drive` (`id` int unsigned not null auto_increment primary key, `start_time` time not null, `end_time` time not null, `duration_m` smallint unsigned not null, `map_distance` float not null, `map_duration` smallint unsigned not null, `destination_id` int unsigned not null) default character set utf8mb4 engine = InnoDB;
 alter table `offer_drive` add index `offer_drive_destination_id_index`(`destination_id`);
 
 create table `offer_status` (`id` int unsigned not null auto_increment primary key, `name` varchar(255) not null) default character set utf8mb4 engine = InnoDB;
 
 create table `service_label` (`id` int unsigned not null auto_increment primary key, `name` varchar(255) not null) default character set utf8mb4 engine = InnoDB;
 
-create table `stored_images` (`filename` varchar(180) not null, `filepath` varchar(250) not null, `associated_date` date null default null, `upload_date` datetime not null, `processed_date` datetime null default null, `activity_label` varchar(15) not null default null, `ocr_results` json not null, primary key (`filename`)) default character set utf8mb4 engine = InnoDB;
+create table `stored_images` (`filename` varchar(180) not null, `filepath` varchar(250) not null, `associated_date` date null default null, `upload_date` datetime not null, `processed_date` datetime null default null, `activity_label` varchar(15) null default null, `ocr_results` json not null, primary key (`filename`)) default character set utf8mb4 engine = InnoDB;
 
 create table `vehicle_stats` (`id` int unsigned not null auto_increment primary key) default character set utf8mb4 engine = InnoDB;
 
-create table `weekday` (`id` int unsigned not null auto_increment primary key, `name` varchar(255) not null, `short_name` varchar(4) not null, `sort_mon` tinyint not null) default character set utf8mb4 engine = InnoDB;
-
-create table `driving_shift` (`id` int unsigned not null auto_increment primary key, `start_time` time not null, `end_time` time not null, `duration_m` smallint unsigned not null, `date` date not null, `active_duration_m` smallint unsigned not null default 0, `duration_diff_m` smallint unsigned not null default 0, `total_pay` numeric(6,2) not null default 0, `app_pay` numeric(6,2) not null default 0, `bonus_pay` numeric(6,2) not null default 0, `customer_tip` numeric(6,2) not null default 0, `contribution_pay` numeric(6,2) not null default 0, `vehicle_stats_id` int unsigned not null, `weekday_id` tinyint generated always as DAYOFWEEK(date) stored unsigned, `service_id` tinyint unsigned not null) default character set utf8mb4 engine = InnoDB;
+create table `driving_shift` (`id` int unsigned not null auto_increment primary key, `start_time` time not null, `end_time` time not null, `duration_m` smallint unsigned not null, `date` date not null, `active_duration_m` smallint unsigned not null default 0, `duration_diff_m` smallint unsigned not null default 0, `total_pay` numeric(6,2) not null default 0, `app_pay` numeric(6,2) not null default 0, `bonus_pay` numeric(6,2) not null default 0, `customer_tip` numeric(6,2) not null default 0, `contribution_pay` numeric(6,2) not null default 0, `weekday_id` tinyint unsigned generated always as (DAYOFWEEK(`date`)) stored, `vehicle_stats_id` int unsigned not null, `service_id` int unsigned not null) default character set utf8mb4 engine = InnoDB;
 alter table `driving_shift` add index `driving_shift_vehicle_stats_id_index`(`vehicle_stats_id`);
-alter table `driving_shift` add index `driving_shift_weekday_id_index`(`weekday_id`);
 alter table `driving_shift` add index `driving_shift_service_id_index`(`service_id`);
 
 create table `shift_pause` (`id` int unsigned not null auto_increment primary key, `start_time` time not null, `end_time` time not null, `duration_m` smallint unsigned not null, `driving_shift_id` int unsigned not null) default character set utf8mb4 engine = InnoDB;
 alter table `shift_pause` add index `shift_pause_driving_shift_id_index`(`driving_shift_id`);
 
-create table `scheduled_shift` (`id` int unsigned not null auto_increment primary key, `start_time` time not null, `end_time` time not null, `duration_m` smallint unsigned not null, `date` date not null, `absent` tinyint(1) not null default false, `cancelled` tinyint(1) not null default false, `weekday_id` tinyint generated always as DAYOFWEEK(date) stored unsigned, `service_id` tinyint unsigned not null, `driving_shift_id` int unsigned null default null) default character set utf8mb4 engine = InnoDB;
-alter table `scheduled_shift` add index `scheduled_shift_weekday_id_index`(`weekday_id`);
+create table `scheduled_shift` (`id` int unsigned not null auto_increment primary key, `start_time` time not null, `end_time` time not null, `duration_m` smallint unsigned not null, `date` date not null, `absent` tinyint(1) not null default false, `cancelled` tinyint(1) not null default false, `weekday_id` tinyint unsigned generated always as (DAYOFWEEK(`date`)) stored, `service_id` int unsigned not null, `driving_shift_id` int unsigned null default null) default character set utf8mb4 engine = InnoDB;
 alter table `scheduled_shift` add index `scheduled_shift_service_id_index`(`service_id`);
 alter table `scheduled_shift` add index `scheduled_shift_driving_shift_id_index`(`driving_shift_id`);
 
-create table `offer` (`id` int unsigned not null auto_increment primary key, `start_time` time not null, `end_time` time not null, `duration_m` smallint unsigned not null, `offer_distance` float not null, `offer_pay` numeric(6,2) not null default 0, `total_pay` numeric(6,2) not null default 0, `add_on` tinyint(1) not null default false, `multi` tinyint(1) not null default false, `service_id` tinyint unsigned not null, `status_id` tinyint unsigned not null, `driving_shift_id` int unsigned not null) default character set utf8mb4 engine = InnoDB;
+create table `offer` (`id` int unsigned not null auto_increment primary key, `start_time` time not null, `end_time` time not null, `duration_m` smallint unsigned not null, `offer_distance` float not null, `offer_pay` numeric(6,2) not null default 0, `total_pay` numeric(6,2) not null default 0, `add_on` tinyint(1) not null default false, `multi` tinyint(1) not null default false, `service_id` int unsigned not null, `status_id` int unsigned not null, `driving_shift_id` int unsigned not null) default character set utf8mb4 engine = InnoDB;
 alter table `offer` add index `offer_service_id_index`(`service_id`);
 alter table `offer` add index `offer_status_id_index`(`status_id`);
 alter table `offer` add index `offer_driving_shift_id_index`(`driving_shift_id`);
@@ -47,15 +43,15 @@ create table `drives_pivot` (`offer_order_id` int unsigned not null, `offer_driv
 alter table `drives_pivot` add index `drives_pivot_offer_order_id_index`(`offer_order_id`);
 alter table `drives_pivot` add index `drives_pivot_offer_drive_id_index`(`offer_drive_id`);
 
+create table `weekday` (`id` int unsigned not null auto_increment primary key, `name` varchar(255) not null, `short_name` varchar(4) not null, `sort_mon` tinyint not null) default character set utf8mb4 engine = InnoDB;
+
 alter table `offer_drive` add constraint `offer_drive_destination_id_foreign` foreign key (`destination_id`) references `destination` (`id`) on update cascade;
 
 alter table `driving_shift` add constraint `driving_shift_vehicle_stats_id_foreign` foreign key (`vehicle_stats_id`) references `vehicle_stats` (`id`) on update cascade;
-alter table `driving_shift` add constraint `driving_shift_weekday_id_foreign` foreign key (`weekday_id`) references `weekday` (`id`) on update cascade;
 alter table `driving_shift` add constraint `driving_shift_service_id_foreign` foreign key (`service_id`) references `service_label` (`id`) on update cascade;
 
 alter table `shift_pause` add constraint `shift_pause_driving_shift_id_foreign` foreign key (`driving_shift_id`) references `driving_shift` (`id`) on update cascade;
 
-alter table `scheduled_shift` add constraint `scheduled_shift_weekday_id_foreign` foreign key (`weekday_id`) references `weekday` (`id`) on update cascade;
 alter table `scheduled_shift` add constraint `scheduled_shift_service_id_foreign` foreign key (`service_id`) references `service_label` (`id`) on update cascade;
 alter table `scheduled_shift` add constraint `scheduled_shift_driving_shift_id_foreign` foreign key (`driving_shift_id`) references `driving_shift` (`id`) on update cascade on delete set null;
 

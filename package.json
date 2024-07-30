@@ -8,8 +8,10 @@
     "build": "tsc",
     "start": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/server.ts",
     "test": "vitest",
-    "db-create-schema": "npx mikro-orm-esm schema:create --dump > createSchema.sql",
-    "db-run-fresh": "npx mikro-orm-esm schema:fresh --run --seed"
+    "db-schema-create": "npx mikro-orm-esm schema:create --dump > createSchema.sql",
+    "db-schema-update": "npx mikro-orm-esm schema:update --dump > updateSchema.sql",
+    "db-schema-update-verbose": "MIKRO_ORM_CLI_VERBOSE=1 npx mikro-orm-esm schema:update --dump",
+    "db-schema-danger-fresh": "npx mikro-orm-esm schema:fresh --run --seed"
   },
   "author": "",
   "license": "ISC",
