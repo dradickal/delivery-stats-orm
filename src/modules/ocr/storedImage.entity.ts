@@ -18,8 +18,8 @@ export class StoredImages {
     @Property({ type: types.datetime, nullable: true, default: null })
     processedDate!: Date | null;
 
-    @Property({ type: types.string, length: 15, default: null })
-    activityLabel!: string;
+    @Property({ type: types.string, length: 15, nullable: true, default: null })
+    activityLabel!: string | null;
 
     @Property({ type: types.json })
     ocrResults!: JSON;
