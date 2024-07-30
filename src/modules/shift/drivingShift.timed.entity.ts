@@ -37,7 +37,7 @@ export class DrivingShift extends TimedEntity {
     contributionPay!: number;
 
     // Override Schema generation that added 'unsigned' after generated statement when defined as reference
-    @Property({ columnType: `tinyint unsigned not null generated always as (DAYOFWEEK(\`date\`)) stored` })
+    @Property({ columnType: `int unsigned generated always as (DAYOFWEEK(\`date\`)) stored` })
     weekdayId!: number;
 
     @ManyToOne({ entity: () => VehicleStats, ref: true })

@@ -16,7 +16,7 @@ export class ScheduledShift extends TimedEntity {
     cancelled!: boolean;
 
     // Override Schema generation that added 'unsigned' after generated statement when defined as reference
-    @Property({ columnType: `tinyint unsigned not null generated always as (DAYOFWEEK(\`date\`)) stored` })
+    @Property({ columnType: `int unsigned generated always as (DAYOFWEEK(\`date\`)) stored` })
     weekdayId!: number;
 
     @ManyToOne({ entity: () => ServiceLabel, ref: true })
