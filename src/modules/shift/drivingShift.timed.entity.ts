@@ -19,7 +19,7 @@ export class DrivingShift extends TimedEntity {
     activeDuration!: number;
 
     @Property({ type: types.smallint, unsigned: true, default: 0, fieldName: 'duration_diff_m' })
-    duration_diff!: number;
+    durationDiff!: number;
 
     @Property({ type: MonetaryType, unsigned: true, default: 0 })
     totalPay!: number;
@@ -28,19 +28,20 @@ export class DrivingShift extends TimedEntity {
     appPay!: number;
 
     @Property({ type: MonetaryType, unsigned: true, default: 0 })
-    bonus_pay!: number;
+    bonusPay!: number;
 
     @Property({ type: MonetaryType, unsigned: true, default: 0 })
     customerTip!: number;
 
     @Property({ type: MonetaryType, unsigned: true, default: 0 })
-    contribution_pay!: number;
+    contributionPay!: number;
+
+    // Override Schema generation that added 'unsigned' after generated statement when defined as reference
+    @Property({ columnType: `tinyint unsigned not null generated always as (DAYOFWEEK(\`date\`)) stored` })
+    weekdayId!: number;
 
     @ManyToOne({ entity: () => VehicleStats, ref: true })
     vehicleStats!: Ref<VehicleStats>;
-
-    @ManyToOne<DrivingShift, Weekday>({ entity: () => Weekday, ref: true, generated: col => `DAYOFWEEK(${col.date}) stored` })
-    weekday!: Ref<Weekday>; 
 
     @ManyToOne({ entity: () => ServiceLabel, ref: true })
     service!: Ref<ServiceLabel>;
