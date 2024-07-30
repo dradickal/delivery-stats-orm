@@ -20,7 +20,7 @@ export class Business {
     @Property<Business>({ 
         type: types.string, 
         length: 200, 
-        generated: cols => `concat(${cols.name}, ' (', ${cols.street}, ' and ', ${cols.crossStreet}, ' )') stored` 
+        generated: cols => `(CONCAT(\`${cols.name}\`, ' (', \`${cols.street}\`, ' and ', \`${cols.crossStreet}\`, ' )')) stored` 
     })
     label!: string;
 };
