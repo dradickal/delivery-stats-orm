@@ -5,30 +5,26 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "module",
+    "build": "tsc",
     "start": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/server.ts",
     "test": "vitest",
     "db-create-schema": "npx mikro-orm-esm schema:create --dump > createSchema.sql",
-    "db-update-schema": "npx mikro-orm-esm schema:update --dump > updateSchema.sql",
-    "db-drop-schema": "npx mikro-orm-esm schema:drop --dump > dropSchema.sql"
+    "db-run-fresh": "npx mikro-orm-esm schema:fresh --run --seed"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@mikro-orm/core": "^6.2.9",
-    "@mikro-orm/migrations": "^6.2.9",
-    "@mikro-orm/mysql": "^6.2.9",
-    "@mikro-orm/reflection": "^6.2.9",
-    "@mikro-orm/seeder": "^6.2.9"
+    "@mikro-orm/core": "^6.3.1",
+    "@mikro-orm/migrations": "^6.3.1",
+    "@mikro-orm/mysql": "^6.3.1",
+    "@mikro-orm/reflection": "^6.3.1",
+    "@mikro-orm/seeder": "^6.3.1"
   },
   "devDependencies": {
-    "@mikro-orm/cli": "^6.2.9",
-    "@types/node": "^20.14.10",
+    "@mikro-orm/cli": "^6.3.1",
+    "@types/node": "^22.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.3",
-    "vitest": "^2.0.2"
-  },
-  "mikro-orm": {
-    "useTsNode": true
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.4"
   }
 }

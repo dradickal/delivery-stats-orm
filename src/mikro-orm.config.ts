@@ -5,7 +5,7 @@ import { Migrator } from '@mikro-orm/migrations';
 
 const config:Options = {
     driver: MySqlDriver,
-    dbName: 'gh_data_raw',
+    dbName: 'gh_driver_data',
     user: 'gh.data.admin',
     password: 'letmein',
     port: 3306,
