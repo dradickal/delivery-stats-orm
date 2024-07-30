@@ -1,0 +1,1593 @@
+{
+  "namespaces": [],
+  "tables": [
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(15)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 15,
+          "mappedType": "string"
+        },
+        "friendly_name": {
+          "name": "friendly_name",
+          "type": "varchar(40)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 40,
+          "mappedType": "string"
+        }
+      },
+      "name": "activity_label",
+      "indexes": [
+        {
+          "columnNames": [
+            "name"
+          ],
+          "composite": false,
+          "keyName": "activity_label_name_unique",
+          "constraint": true,
+          "primary": false,
+          "unique": true
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {},
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(100)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 100,
+          "mappedType": "string"
+        },
+        "address": {
+          "name": "address",
+          "type": "varchar(150)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 150,
+          "mappedType": "string"
+        },
+        "street": {
+          "name": "street",
+          "type": "varchar(40)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 40,
+          "mappedType": "string"
+        },
+        "cross_street": {
+          "name": "cross_street",
+          "type": "varchar(40)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 40,
+          "mappedType": "string"
+        },
+        "label": {
+          "name": "label",
+          "type": "varchar(200)",
+          "generated": "(CONCAT(`name`, ' (', `street`, ' and ', `cross_street`, ' )')) stored",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 200,
+          "mappedType": "string"
+        }
+      },
+      "name": "business",
+      "indexes": [
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {},
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 255,
+          "mappedType": "string"
+        }
+      },
+      "name": "destination",
+      "indexes": [
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {},
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "start_time": {
+          "name": "start_time",
+          "type": "time",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "time"
+        },
+        "end_time": {
+          "name": "end_time",
+          "type": "time",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "time"
+        },
+        "duration_m": {
+          "name": "duration_m",
+          "type": "smallint",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "smallint"
+        },
+        "map_distance": {
+          "name": "map_distance",
+          "type": "float",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "float"
+        },
+        "map_duration": {
+          "name": "map_duration",
+          "type": "smallint",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "smallint"
+        },
+        "destination_id": {
+          "name": "destination_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        }
+      },
+      "name": "offer_drive",
+      "indexes": [
+        {
+          "columnNames": [
+            "destination_id"
+          ],
+          "composite": false,
+          "keyName": "offer_drive_destination_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "offer_drive_destination_id_foreign": {
+          "constraintName": "offer_drive_destination_id_foreign",
+          "columnNames": [
+            "destination_id"
+          ],
+          "localTableName": "offer_drive",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "destination",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 255,
+          "mappedType": "string"
+        }
+      },
+      "name": "offer_status",
+      "indexes": [
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {},
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 255,
+          "mappedType": "string"
+        }
+      },
+      "name": "service_label",
+      "indexes": [
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {},
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "filename": {
+          "name": "filename",
+          "type": "varchar(180)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 180,
+          "mappedType": "string"
+        },
+        "filepath": {
+          "name": "filepath",
+          "type": "varchar(250)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 250,
+          "mappedType": "string"
+        },
+        "associated_date": {
+          "name": "associated_date",
+          "type": "date",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": null,
+          "default": "null",
+          "mappedType": "date"
+        },
+        "upload_date": {
+          "name": "upload_date",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "datetime"
+        },
+        "processed_date": {
+          "name": "processed_date",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": null,
+          "default": "null",
+          "mappedType": "datetime"
+        },
+        "activity_label": {
+          "name": "activity_label",
+          "type": "varchar(15)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 15,
+          "default": "null",
+          "mappedType": "string"
+        },
+        "ocr_results": {
+          "name": "ocr_results",
+          "type": "json",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "json"
+        }
+      },
+      "name": "stored_images",
+      "indexes": [
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "filename"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {},
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        }
+      },
+      "name": "vehicle_stats",
+      "indexes": [
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {},
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "start_time": {
+          "name": "start_time",
+          "type": "time",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "time"
+        },
+        "end_time": {
+          "name": "end_time",
+          "type": "time",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "time"
+        },
+        "duration_m": {
+          "name": "duration_m",
+          "type": "smallint",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "smallint"
+        },
+        "date": {
+          "name": "date",
+          "type": "date",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "date"
+        },
+        "active_duration_m": {
+          "name": "active_duration_m",
+          "type": "smallint",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "default": "0",
+          "mappedType": "smallint"
+        },
+        "duration_diff_m": {
+          "name": "duration_diff_m",
+          "type": "smallint",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "default": "0",
+          "mappedType": "smallint"
+        },
+        "total_pay": {
+          "name": "total_pay",
+          "type": "numeric(6,2)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 6,
+          "scale": 2,
+          "default": "0",
+          "mappedType": "decimal"
+        },
+        "app_pay": {
+          "name": "app_pay",
+          "type": "numeric(6,2)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 6,
+          "scale": 2,
+          "default": "0",
+          "mappedType": "decimal"
+        },
+        "bonus_pay": {
+          "name": "bonus_pay",
+          "type": "numeric(6,2)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 6,
+          "scale": 2,
+          "default": "0",
+          "mappedType": "decimal"
+        },
+        "customer_tip": {
+          "name": "customer_tip",
+          "type": "numeric(6,2)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 6,
+          "scale": 2,
+          "default": "0",
+          "mappedType": "decimal"
+        },
+        "contribution_pay": {
+          "name": "contribution_pay",
+          "type": "numeric(6,2)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 6,
+          "scale": 2,
+          "default": "0",
+          "mappedType": "decimal"
+        },
+        "weekday_id": {
+          "name": "weekday_id",
+          "type": "int unsigned",
+          "generated": "(DAYOFWEEK(`date`)) stored",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "vehicle_stats_id": {
+          "name": "vehicle_stats_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "service_id": {
+          "name": "service_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        }
+      },
+      "name": "driving_shift",
+      "indexes": [
+        {
+          "columnNames": [
+            "vehicle_stats_id"
+          ],
+          "composite": false,
+          "keyName": "driving_shift_vehicle_stats_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "service_id"
+          ],
+          "composite": false,
+          "keyName": "driving_shift_service_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "driving_shift_vehicle_stats_id_foreign": {
+          "constraintName": "driving_shift_vehicle_stats_id_foreign",
+          "columnNames": [
+            "vehicle_stats_id"
+          ],
+          "localTableName": "driving_shift",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "vehicle_stats",
+          "updateRule": "cascade"
+        },
+        "driving_shift_service_id_foreign": {
+          "constraintName": "driving_shift_service_id_foreign",
+          "columnNames": [
+            "service_id"
+          ],
+          "localTableName": "driving_shift",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "service_label",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "start_time": {
+          "name": "start_time",
+          "type": "time",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "time"
+        },
+        "end_time": {
+          "name": "end_time",
+          "type": "time",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "time"
+        },
+        "duration_m": {
+          "name": "duration_m",
+          "type": "smallint",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "smallint"
+        },
+        "driving_shift_id": {
+          "name": "driving_shift_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        }
+      },
+      "name": "shift_pause",
+      "indexes": [
+        {
+          "columnNames": [
+            "driving_shift_id"
+          ],
+          "composite": false,
+          "keyName": "shift_pause_driving_shift_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "shift_pause_driving_shift_id_foreign": {
+          "constraintName": "shift_pause_driving_shift_id_foreign",
+          "columnNames": [
+            "driving_shift_id"
+          ],
+          "localTableName": "shift_pause",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "driving_shift",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "start_time": {
+          "name": "start_time",
+          "type": "time",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "time"
+        },
+        "end_time": {
+          "name": "end_time",
+          "type": "time",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "time"
+        },
+        "duration_m": {
+          "name": "duration_m",
+          "type": "smallint",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "smallint"
+        },
+        "date": {
+          "name": "date",
+          "type": "date",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "date"
+        },
+        "absent": {
+          "name": "absent",
+          "type": "tinyint(1)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 1,
+          "default": "false",
+          "mappedType": "boolean"
+        },
+        "cancelled": {
+          "name": "cancelled",
+          "type": "tinyint(1)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 1,
+          "default": "false",
+          "mappedType": "boolean"
+        },
+        "weekday_id": {
+          "name": "weekday_id",
+          "type": "int unsigned",
+          "generated": "(DAYOFWEEK(`date`)) stored",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "integer"
+        },
+        "service_id": {
+          "name": "service_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "driving_shift_id": {
+          "name": "driving_shift_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": null,
+          "default": "null",
+          "mappedType": "integer"
+        }
+      },
+      "name": "scheduled_shift",
+      "indexes": [
+        {
+          "columnNames": [
+            "service_id"
+          ],
+          "composite": false,
+          "keyName": "scheduled_shift_service_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "driving_shift_id"
+          ],
+          "composite": false,
+          "keyName": "scheduled_shift_driving_shift_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "scheduled_shift_service_id_foreign": {
+          "constraintName": "scheduled_shift_service_id_foreign",
+          "columnNames": [
+            "service_id"
+          ],
+          "localTableName": "scheduled_shift",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "service_label",
+          "updateRule": "cascade"
+        },
+        "scheduled_shift_driving_shift_id_foreign": {
+          "constraintName": "scheduled_shift_driving_shift_id_foreign",
+          "columnNames": [
+            "driving_shift_id"
+          ],
+          "localTableName": "scheduled_shift",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "driving_shift",
+          "deleteRule": "set null",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "start_time": {
+          "name": "start_time",
+          "type": "time",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "time"
+        },
+        "end_time": {
+          "name": "end_time",
+          "type": "time",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "time"
+        },
+        "duration_m": {
+          "name": "duration_m",
+          "type": "smallint",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "smallint"
+        },
+        "offer_distance": {
+          "name": "offer_distance",
+          "type": "float",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "float"
+        },
+        "offer_pay": {
+          "name": "offer_pay",
+          "type": "numeric(6,2)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 6,
+          "scale": 2,
+          "default": "0",
+          "mappedType": "decimal"
+        },
+        "total_pay": {
+          "name": "total_pay",
+          "type": "numeric(6,2)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 6,
+          "scale": 2,
+          "default": "0",
+          "mappedType": "decimal"
+        },
+        "add_on": {
+          "name": "add_on",
+          "type": "tinyint(1)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 1,
+          "default": "false",
+          "mappedType": "boolean"
+        },
+        "multi": {
+          "name": "multi",
+          "type": "tinyint(1)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 1,
+          "default": "false",
+          "mappedType": "boolean"
+        },
+        "service_id": {
+          "name": "service_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "status_id": {
+          "name": "status_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "driving_shift_id": {
+          "name": "driving_shift_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        }
+      },
+      "name": "offer",
+      "indexes": [
+        {
+          "columnNames": [
+            "service_id"
+          ],
+          "composite": false,
+          "keyName": "offer_service_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "status_id"
+          ],
+          "composite": false,
+          "keyName": "offer_status_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "driving_shift_id"
+          ],
+          "composite": false,
+          "keyName": "offer_driving_shift_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "offer_service_id_foreign": {
+          "constraintName": "offer_service_id_foreign",
+          "columnNames": [
+            "service_id"
+          ],
+          "localTableName": "offer",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "service_label",
+          "updateRule": "cascade"
+        },
+        "offer_status_id_foreign": {
+          "constraintName": "offer_status_id_foreign",
+          "columnNames": [
+            "status_id"
+          ],
+          "localTableName": "offer",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "offer_status",
+          "updateRule": "cascade"
+        },
+        "offer_driving_shift_id_foreign": {
+          "constraintName": "offer_driving_shift_id_foreign",
+          "columnNames": [
+            "driving_shift_id"
+          ],
+          "localTableName": "offer",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "driving_shift",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "total_pay": {
+          "name": "total_pay",
+          "type": "numeric(6,2)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 6,
+          "scale": 2,
+          "mappedType": "decimal"
+        },
+        "base_pay": {
+          "name": "base_pay",
+          "type": "numeric(6,2)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 6,
+          "scale": 2,
+          "mappedType": "decimal"
+        },
+        "bonus_pay": {
+          "name": "bonus_pay",
+          "type": "numeric(6,2)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 6,
+          "scale": 2,
+          "default": "0",
+          "mappedType": "decimal"
+        },
+        "app_tip": {
+          "name": "app_tip",
+          "type": "numeric(6,2)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 6,
+          "scale": 2,
+          "default": "0",
+          "mappedType": "decimal"
+        },
+        "cash_tip": {
+          "name": "cash_tip",
+          "type": "numeric(6,2)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 6,
+          "scale": 2,
+          "default": "0",
+          "mappedType": "decimal"
+        },
+        "items_quantity": {
+          "name": "items_quantity",
+          "type": "tinyint",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": null,
+          "default": "null",
+          "mappedType": "tinyint"
+        },
+        "items_count": {
+          "name": "items_count",
+          "type": "tinyint",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": null,
+          "default": "null",
+          "mappedType": "tinyint"
+        },
+        "order_placed": {
+          "name": "order_placed",
+          "type": "time",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": null,
+          "default": "null",
+          "mappedType": "time"
+        },
+        "order_eta": {
+          "name": "order_eta",
+          "type": "time",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": null,
+          "default": "null",
+          "mappedType": "time"
+        },
+        "gh_pickup_time": {
+          "name": "gh_pickup_time",
+          "type": "time",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": null,
+          "default": "null",
+          "mappedType": "time"
+        },
+        "pickup_time": {
+          "name": "pickup_time",
+          "type": "time",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": null,
+          "default": "null",
+          "mappedType": "time"
+        },
+        "pickup_delay": {
+          "name": "pickup_delay",
+          "type": "tinyint(1)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 1,
+          "default": "false",
+          "mappedType": "boolean"
+        },
+        "gh_distance": {
+          "name": "gh_distance",
+          "type": "float",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "float"
+        },
+        "offer_id": {
+          "name": "offer_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "business_id": {
+          "name": "business_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        }
+      },
+      "name": "offer_order",
+      "indexes": [
+        {
+          "columnNames": [
+            "offer_id"
+          ],
+          "composite": false,
+          "keyName": "offer_order_offer_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "business_id"
+          ],
+          "composite": false,
+          "keyName": "offer_order_business_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "offer_order_offer_id_foreign": {
+          "constraintName": "offer_order_offer_id_foreign",
+          "columnNames": [
+            "offer_id"
+          ],
+          "localTableName": "offer_order",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "offer",
+          "updateRule": "cascade"
+        },
+        "offer_order_business_id_foreign": {
+          "constraintName": "offer_order_business_id_foreign",
+          "columnNames": [
+            "business_id"
+          ],
+          "localTableName": "offer_order",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "business",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "offer_order_id": {
+          "name": "offer_order_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "offer_drive_id": {
+          "name": "offer_drive_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        }
+      },
+      "name": "drives_pivot",
+      "indexes": [
+        {
+          "columnNames": [
+            "offer_order_id"
+          ],
+          "composite": false,
+          "keyName": "drives_pivot_offer_order_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "columnNames": [
+            "offer_drive_id"
+          ],
+          "composite": false,
+          "keyName": "drives_pivot_offer_drive_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "offer_order_id",
+            "offer_drive_id"
+          ],
+          "composite": true,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "drives_pivot_offer_order_id_foreign": {
+          "constraintName": "drives_pivot_offer_order_id_foreign",
+          "columnNames": [
+            "offer_order_id"
+          ],
+          "localTableName": "drives_pivot",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "offer_order",
+          "deleteRule": "cascade",
+          "updateRule": "cascade"
+        },
+        "drives_pivot_offer_drive_id_foreign": {
+          "constraintName": "drives_pivot_offer_drive_id_foreign",
+          "columnNames": [
+            "offer_drive_id"
+          ],
+          "localTableName": "drives_pivot",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "offer_drive",
+          "deleteRule": "cascade",
+          "updateRule": "cascade"
+        }
+      },
+      "nativeEnums": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": true,
+          "primary": true,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 255,
+          "mappedType": "string"
+        },
+        "short_name": {
+          "name": "short_name",
+          "type": "varchar(4)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 4,
+          "mappedType": "string"
+        },
+        "sort_mon": {
+          "name": "sort_mon",
+          "type": "tinyint",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "tinyint"
+        }
+      },
+      "name": "weekday",
+      "indexes": [
+        {
+          "keyName": "PRIMARY",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "constraint": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {},
+      "nativeEnums": {}
+    }
+  ],
+  "nativeEnums": {}
+}
