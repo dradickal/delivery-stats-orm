@@ -17,13 +17,13 @@ export class OfferOrder {
     @Property({ type: MonetaryType, unsigned: true })
     basePay!: number;
 
-    @Property({ type: MonetaryType, unsigned: true, default: 0 })
+    @Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
     bonusPay!: number;
 
-    @Property({ type: MonetaryType, unsigned: true, default: 0 })
+    @Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
     appTip!: number;
 
-    @Property({ type: MonetaryType, unsigned: true, default: 0 })
+    @Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
     cashTip!: number;
 
     @Property({ type: types.tinyint, unsigned: true, nullable: true, default: null })

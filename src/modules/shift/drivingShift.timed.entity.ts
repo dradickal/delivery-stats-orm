@@ -5,7 +5,6 @@ import { ShiftPause } from "./shiftPause.timed.entity.js";
 import { VehicleStats } from "../vehicle/vehicleStats.entity.js";
 import { ServiceLabel } from "../common/service.label.entity.js";
 import { ScheduledShift } from "./scheduledShift.timed.entity.js";
-import { Weekday } from "../common/weekday.label.entity.js";
 import { MonetaryType } from "../common/MonetaryType.js";
 
 
@@ -21,23 +20,23 @@ export class DrivingShift extends TimedEntity {
     @Property({ type: types.smallint, unsigned: true, default: 0, fieldName: 'duration_diff_m' })
     durationDiff!: number;
 
-    @Property({ type: MonetaryType, unsigned: true, default: 0 })
+    @Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
     totalPay!: number;
 
-    @Property({ type: MonetaryType, unsigned: true, default: 0 })
+    @Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
     appPay!: number;
 
-    @Property({ type: MonetaryType, unsigned: true, default: 0 })
+    @Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
     bonusPay!: number;
 
-    @Property({ type: MonetaryType, unsigned: true, default: 0 })
+    @Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
     customerTip!: number;
 
-    @Property({ type: MonetaryType, unsigned: true, default: 0 })
+    @Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
     contributionPay!: number;
 
-    // Override Schema generation that added 'unsigned' after generated statement when defined as reference
-    @Property({ columnType: `int unsigned generated always as (DAYOFWEEK(\`date\`)) stored` })
+    // Override Schema generation that added 'unsigned' after generated statement when defined as reference.
+    @Property({ columnType: `int unsigned generated always as (DAYOFWEEK(\`date\`)) stored`, ignoreSchemaChanges: ['type','extra'] })
     weekdayId!: number;
 
     @ManyToOne({ entity: () => VehicleStats, ref: true })
