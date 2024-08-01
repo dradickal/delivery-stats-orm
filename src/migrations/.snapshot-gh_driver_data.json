@@ -582,6 +582,9 @@
           "precision": 6,
           "scale": 2,
           "default": "0",
+          "ignoreSchemaChanges": [
+            "default"
+          ],
           "mappedType": "decimal"
         },
         "app_pay": {
@@ -594,6 +597,9 @@
           "precision": 6,
           "scale": 2,
           "default": "0",
+          "ignoreSchemaChanges": [
+            "default"
+          ],
           "mappedType": "decimal"
         },
         "bonus_pay": {
@@ -606,6 +612,9 @@
           "precision": 6,
           "scale": 2,
           "default": "0",
+          "ignoreSchemaChanges": [
+            "default"
+          ],
           "mappedType": "decimal"
         },
         "customer_tip": {
@@ -618,6 +627,9 @@
           "precision": 6,
           "scale": 2,
           "default": "0",
+          "ignoreSchemaChanges": [
+            "default"
+          ],
           "mappedType": "decimal"
         },
         "contribution_pay": {
@@ -630,6 +642,9 @@
           "precision": 6,
           "scale": 2,
           "default": "0",
+          "ignoreSchemaChanges": [
+            "default"
+          ],
           "mappedType": "decimal"
         },
         "weekday_id": {
@@ -640,6 +655,10 @@
           "autoincrement": false,
           "primary": false,
           "nullable": false,
+          "ignoreSchemaChanges": [
+            "type",
+            "extra"
+          ],
           "mappedType": "integer"
         },
         "vehicle_stats_id": {
@@ -1049,6 +1068,9 @@
           "precision": 6,
           "scale": 2,
           "default": "0",
+          "ignoreSchemaChanges": [
+            "default"
+          ],
           "mappedType": "decimal"
         },
         "total_pay": {
@@ -1061,6 +1083,9 @@
           "precision": 6,
           "scale": 2,
           "default": "0",
+          "ignoreSchemaChanges": [
+            "default"
+          ],
           "mappedType": "decimal"
         },
         "add_on": {
@@ -1244,6 +1269,9 @@
           "precision": 6,
           "scale": 2,
           "default": "0",
+          "ignoreSchemaChanges": [
+            "default"
+          ],
           "mappedType": "decimal"
         },
         "app_tip": {
@@ -1256,6 +1284,9 @@
           "precision": 6,
           "scale": 2,
           "default": "0",
+          "ignoreSchemaChanges": [
+            "default"
+          ],
           "mappedType": "decimal"
         },
         "cash_tip": {
@@ -1268,6 +1299,9 @@
           "precision": 6,
           "scale": 2,
           "default": "0",
+          "ignoreSchemaChanges": [
+            "default"
+          ],
           "mappedType": "decimal"
         },
         "items_quantity": {
