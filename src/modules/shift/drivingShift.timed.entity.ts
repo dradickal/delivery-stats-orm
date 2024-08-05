@@ -14,10 +14,10 @@ export class DrivingShift extends TimedEntity {
     @Property({ type: types.date })
     date!: Date;
 
-    @Property({ type: types.smallint, unsigned: true, default: 0, fieldName: 'active_duration_m' })
+    @Property({ type: types.smallint, unsigned: true, default: 0, nullable: false, fieldName: 'active_duration_m' })
     activeDuration!: number;
 
-    @Property({ type: types.smallint, unsigned: true, default: 0, fieldName: 'duration_diff_m' })
+    @Property({ type: types.smallint, unsigned: true, default: 0, nullable: false, fieldName: 'active_shift_diff_m' })
     durationDiff!: number;
 
     @Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
