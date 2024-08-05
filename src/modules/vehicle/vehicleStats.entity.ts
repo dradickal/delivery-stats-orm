@@ -7,10 +7,10 @@ export class VehicleStats {
     @PrimaryKey()
     id!: number;
 
-    @Property({ type: types.decimal, precision: 2, scale: 2, unsigned: true, default: 0, nullable: false, ignoreSchemaChanges: ['default'] })
+    @Property({ type: types.decimal, precision: 2, scale: 4, unsigned: true, default: 0, nullable: false, ignoreSchemaChanges: ['default'] })
     milesDriven!: number;
 
-    @Property({ type: types.decimal, precision: 1, scale: 2, unsigned: true, default: 0, nullable: false, ignoreSchemaChanges: ['default'] })
+    @Property({ type: types.decimal, precision: 1, scale: 3, unsigned: true, default: 0, nullable: false, ignoreSchemaChanges: ['default'] })
     mpg!: number;
 
     @Property({ type: types.smallint, unsigned: true, default: 0, nullable: false, fieldName: 'vehicle_duration_m' })
@@ -22,10 +22,10 @@ export class VehicleStats {
     @Property({ type: types.smallint, unsigned: true, default: 0, nullable: false, fieldName: 'vehicle_shift_diff_m' })
     shiftDiff!: number;
 
-    @Property({ type: types.decimal, precision: 1, scale: 2, unsigned: true, default: 0, nullable: false, ignoreSchemaChanges: ['default'] })
+    @Property({ type: types.decimal, precision: 1, scale: 3, unsigned: true, default: 0, nullable: false, ignoreSchemaChanges: ['default'] })
     gallonsConsumed!: number;
 
-    @Property({ type: MonetaryType, unsigned: true, default: null, ignoreSchemaChanges: ['default']})
+    @Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default']})
     payPerMile!: number;
 
     @OneToMany({ entity: () => DrivingShift, mappedBy: 'vehicleStats' })
