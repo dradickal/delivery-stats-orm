@@ -17,9 +17,9 @@ create table `service_label` (`id` int unsigned not null auto_increment primary 
 
 create table `stored_images` (`filename` varchar(180) not null, `filepath` varchar(250) not null, `associated_date` date null default null, `upload_date` datetime not null, `processed_date` datetime null default null, `activity_label` varchar(15) null default null, `ocr_results` json not null, primary key (`filename`)) default character set utf8mb4 engine = InnoDB;
 
-create table `vehicle_stats` (`id` int unsigned not null auto_increment primary key) default character set utf8mb4 engine = InnoDB;
+create table `vehicle_stats` (`id` int unsigned not null auto_increment primary key, `miles_driven` numeric(2,4) not null default 0, `mpg` numeric(1,3) not null default 0, `vehicle_duration_m` smallint unsigned not null default 0, `vehicle_active_diff_m` smallint unsigned not null default 0, `vehicle_shift_diff_m` smallint unsigned not null default 0, `gallons_consumed` numeric(1,3) not null default 0, `pay_per_mile` numeric(6,2) not null default 0) default character set utf8mb4 engine = InnoDB;
 
-create table `driving_shift` (`id` int unsigned not null auto_increment primary key, `start_time` time not null, `end_time` time not null, `duration_m` smallint unsigned not null, `date` date not null, `active_duration_m` smallint unsigned not null default 0, `duration_diff_m` smallint unsigned not null default 0, `total_pay` numeric(6,2) not null default 0, `app_pay` numeric(6,2) not null default 0, `bonus_pay` numeric(6,2) not null default 0, `customer_tip` numeric(6,2) not null default 0, `contribution_pay` numeric(6,2) not null default 0, `weekday_id` int unsigned generated always as (DAYOFWEEK(`date`)) stored, `vehicle_stats_id` int unsigned not null, `service_id` int unsigned not null) default character set utf8mb4 engine = InnoDB;
+create table `driving_shift` (`id` int unsigned not null auto_increment primary key, `start_time` time not null, `end_time` time not null, `duration_m` smallint unsigned not null, `date` date not null, `active_duration_m` smallint unsigned not null default 0, `active_shift_diff_m` smallint unsigned not null default 0, `total_pay` numeric(6,2) not null default 0, `app_pay` numeric(6,2) not null default 0, `bonus_pay` numeric(6,2) not null default 0, `customer_tip` numeric(6,2) not null default 0, `contribution_pay` numeric(6,2) not null default 0, `weekday_id` int unsigned generated always as (DAYOFWEEK(`date`)) stored, `vehicle_stats_id` int unsigned not null, `service_id` int unsigned not null) default character set utf8mb4 engine = InnoDB;
 alter table `driving_shift` add index `driving_shift_vehicle_stats_id_index`(`vehicle_stats_id`);
 alter table `driving_shift` add index `driving_shift_service_id_index`(`service_id`);
 
@@ -66,3 +66,5 @@ alter table `drives_pivot` add constraint `drives_pivot_offer_order_id_foreign` 
 alter table `drives_pivot` add constraint `drives_pivot_offer_drive_id_foreign` foreign key (`offer_drive_id`) references `offer_drive` (`id`) on update cascade on delete cascade;
 
 set foreign_key_checks = 1;
+
+[32m[39m

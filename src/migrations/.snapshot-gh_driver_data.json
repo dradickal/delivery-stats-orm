@@ -479,6 +479,99 @@
           "nullable": false,
           "length": null,
           "mappedType": "integer"
+        },
+        "miles_driven": {
+          "name": "miles_driven",
+          "type": "numeric(2,4)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 2,
+          "scale": 4,
+          "default": "0",
+          "ignoreSchemaChanges": [
+            "default"
+          ],
+          "mappedType": "decimal"
+        },
+        "mpg": {
+          "name": "mpg",
+          "type": "numeric(1,3)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 1,
+          "scale": 3,
+          "default": "0",
+          "ignoreSchemaChanges": [
+            "default"
+          ],
+          "mappedType": "decimal"
+        },
+        "vehicle_duration_m": {
+          "name": "vehicle_duration_m",
+          "type": "smallint",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "default": "0",
+          "mappedType": "smallint"
+        },
+        "vehicle_active_diff_m": {
+          "name": "vehicle_active_diff_m",
+          "type": "smallint",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "default": "0",
+          "mappedType": "smallint"
+        },
+        "vehicle_shift_diff_m": {
+          "name": "vehicle_shift_diff_m",
+          "type": "smallint",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "default": "0",
+          "mappedType": "smallint"
+        },
+        "gallons_consumed": {
+          "name": "gallons_consumed",
+          "type": "numeric(1,3)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 1,
+          "scale": 3,
+          "default": "0",
+          "ignoreSchemaChanges": [
+            "default"
+          ],
+          "mappedType": "decimal"
+        },
+        "pay_per_mile": {
+          "name": "pay_per_mile",
+          "type": "numeric(6,2)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "precision": 6,
+          "scale": 2,
+          "default": "null",
+          "ignoreSchemaChanges": [
+            "default"
+          ],
+          "mappedType": "decimal"
         }
       },
       "name": "vehicle_stats",
@@ -561,8 +654,8 @@
           "default": "0",
           "mappedType": "smallint"
         },
-        "duration_diff_m": {
-          "name": "duration_diff_m",
+        "active_shift_diff_m": {
+          "name": "active_shift_diff_m",
           "type": "smallint",
           "unsigned": true,
           "autoincrement": false,
