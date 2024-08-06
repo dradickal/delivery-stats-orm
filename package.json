@@ -5,8 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npx mikro-orm-esm cache:generate --combine",
     "start": "node --no-warnings=ExperimentalWarning --loader ts-node/esm src/server.ts",
+    "start:prod": "NODE_ENV=production node dist/server.js",
     "test": "vitest",
     "db-schema-create": "npx mikro-orm-esm schema:create --dump > createSchema.sql",
     "db-schema-diff": "npx mikro-orm-esm migration:check",
