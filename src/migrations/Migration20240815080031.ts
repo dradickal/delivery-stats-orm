@@ -1,6 +1,6 @@
 import { Migration } from '@mikro-orm/migrations';
 
-export class Migration20240805191503 extends Migration {
+export class Migration20240815080031 extends Migration {
 
   async up(): Promise<void> {
     this.addSql('alter table `driving_shift` add index `driving_shift_weekday_id_index`(`weekday_id`);');

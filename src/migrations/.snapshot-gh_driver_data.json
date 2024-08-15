@@ -482,13 +482,13 @@
         },
         "miles_driven": {
           "name": "miles_driven",
-          "type": "numeric(2,4)",
+          "type": "numeric(4,2)",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "precision": 2,
-          "scale": 4,
+          "precision": 4,
+          "scale": 2,
           "default": "0",
           "ignoreSchemaChanges": [
             "default"
@@ -497,13 +497,13 @@
         },
         "mpg": {
           "name": "mpg",
-          "type": "numeric(1,3)",
+          "type": "numeric(3,1)",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "precision": 1,
-          "scale": 3,
+          "precision": 3,
+          "scale": 1,
           "default": "0",
           "ignoreSchemaChanges": [
             "default"
@@ -545,13 +545,13 @@
         },
         "gallons_consumed": {
           "name": "gallons_consumed",
-          "type": "numeric(1,3)",
+          "type": "numeric(3,1)",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "precision": 1,
-          "scale": 3,
+          "precision": 3,
+          "scale": 1,
           "default": "0",
           "ignoreSchemaChanges": [
             "default"
@@ -567,7 +567,7 @@
           "nullable": false,
           "precision": 6,
           "scale": 2,
-          "default": "null",
+          "default": "0",
           "ignoreSchemaChanges": [
             "default"
           ],
