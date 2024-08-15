@@ -1,13 +1,23 @@
-# Setting up Envirionment
-## Creating the Database
-Due to an issue with the schema generation when creating a relationship with the Weekday entity, a few lines of SQL need to be added. This is handled in the migration files with the following up method:
-```ts
-  async up(): Promise<void> {
-    this.addSql('alter table `driving_shift` add index `driving_shift_weekday_id_index`(`weekday_id`);');
-    this.addSql('alter table `driving_shift` add constraint `driving_shift_weekday_id_foreign` foreign key (`weekday_id`) references `weekday` (`id`)');
+# Setting up Local Envirionment
+Migrations are set up with the Mikro-ORM library. To create the database in your environment run the following command. It is labeled as `danger` because the library method being used will drop the existing database that matches `dbName` in the config. If ran in an existing environment all local data will be lost. 
 
-    this.addSql('alter table `scheduled_shift` add index `scheduled_shift_weekday_id_index`(`weekday_id`);');
-    this.addSql('alter table `scheduled_shift` add constraint `scheduled_shift_weekday_id_foreign` foreign key (`weekday_id`) references `weekday` (`id`)');
-  }
-```
-This is adding an index on the `weekday_id` columns and adding foreign key constraints for the `driving_shift` and `scheduled_shift` tables.
+```$ npm run db-migration-danger-fresh```
+
+The execution of the command creates a database with the ORM's `config.dbName` if a matching one does not already exist. It then runs all migrations, building the current schema, and records the executed migrations in a generated table `mikro_orm_migrations`. 
+
+For this repo, the `--seed` flag is also used, but will only seed the tables for business logic "Label" entities (`Service`, `Weekday`, etc). 
+
+## Maintaining the Database
+To maintain the database after code changes, there are two commands which should be run. First, confirm whether a change in the schema has occured by running:
+
+```$ db-schema-diff```
+
+This uses Mikro-ORMs schema generator and compares the current schema state with a previous snapshot of the schema. The snapshot is captured from the time of the last generated migration. See Mikro-ORMs reasoning behind [the snapshot](https://mikro-orm.io/docs/migrations#snapshots). 
+
+When a schema change has occured, generate a new migration with:
+
+```$ db-migration-diff```
+
+The up method of the generated Migration class will contain the DB changes required to maintain the schema. An updated snapshot will also be created.
+
+**!! Use a separate commit for the migration changes !!**
