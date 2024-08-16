@@ -1,5 +1,5 @@
 import { Entity } from '@mikro-orm/core';
 import { LabelEntity } from './label.entity.js';
 
-@Entity({ readonly: true })
+@Entity()
 export class ServiceLabel extends LabelEntity {};

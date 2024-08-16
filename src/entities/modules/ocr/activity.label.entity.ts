@@ -1,7 +1,7 @@
 import { Entity, PrimaryKey, Property, types } from '@mikro-orm/core';
 import { LabelEntity } from '../common/label.entity.js';
 
-@Entity({ readonly: true })
+@Entity()
 export class ActivityLabel extends LabelEntity {
 
     @Property({ type: types.string, length: 15, unique: true })
