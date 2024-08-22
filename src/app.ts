@@ -1,14 +1,16 @@
 import express from 'express';
 import cors from 'cors';
-import { createRequestContext } from './db.js';
-import { StoredImagesRouter } from './routers/storedImagesRouter.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
+
+import { createRequestContext } from './db.js';
+import { ErrorHandler } from './routers/utils/errorHandler.js';
+import { StoredImagesRouter } from './routers/storedImagesRouter.js';
 
 export async function bootstrap(port?:number|string) {
     const app = express();
     const __dirname = path.dirname(fileURLToPath(import.meta.url));
-    
+
     port = port || process.env.PORT || 3001;
     app.use(express.json());
     app.use(cors());
@@ -26,6 +28,7 @@ export async function bootstrap(port?:number|string) {
     });
     app.use('/image', StoredImagesRouter());
 
+    app.use(ErrorHandler);
 
     const server = app.listen(port, () => {
         console.log(`Listening at http://localhost:${port}`);

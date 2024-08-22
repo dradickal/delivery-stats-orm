@@ -1,5 +1,5 @@
 import { getEntityServices } from "../../db.js";
-import { PlainObject } from "@mikro-orm/core";
+import { PlainObject, ref } from "@mikro-orm/core";
 
 export interface IFile {
     fieldname: string;
@@ -33,18 +33,19 @@ export function StoredImagesService (db = getEntityServices()): IStoredImagesSer
         console.log(`[StoredImagesService:postStoredImage] context-specific em-ID: ${em.id || 'TEST'}`);
         
         const {files, serviceId, associatedDate} = formInput;
-        const serviceRef = serviceRepository.getReference(serviceId);
+        const service = await serviceRepository.findOneOrFail({ id: serviceId });
         for (const file of files) {
             repository.create({
                 filename: file.filename, 
                 filepath: file.path, 
                 associatedDate, 
-                service: serviceRef,
+                service,
             });
         }
+        await em.flush();
 
         return {
-            method: 'postStoredImage',
+            message: `Successfully stored ${files.length} images.`,
         }
     }
 
