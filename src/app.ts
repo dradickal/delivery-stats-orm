@@ -1,28 +1,30 @@
 import express from 'express';
-import { initORM, Services } from './db.js';
-import { RequestContext } from '@mikro-orm/mysql';
+import cors from 'cors';
+import { createRequestContext } from './db.js';
+import { StoredImagesRouter } from './routers/storedImagesRouter.js';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 export async function bootstrap(port?:number|string) {
-    const db = await initORM();
     const app = express();
-
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    
     port = port || process.env.PORT || 3001;
-
     app.use(express.json());
-    app.use(async (req, res, next) => {
-        await RequestContext.create(db.orm.em, next);
-        req.db = {...db};
-    });
+    app.use(cors());
+
+    app.use(express.static(path.join(__dirname, '../public')));
+    app.use(createRequestContext);
 
     app.get('/', (req, res) => res.json({ message: 'Welcome to MikroORM express JS example, try CRUD on /author and /book endpoints!' }));
     app.get('/service/all', async (req, res) => {
-        const repository = db.service;
-        const all = await repository.findAll();
+        const input = req.params;
         res.json({ 
             message: 'returning all services',
-            data: all
+            data: {}
         });
-    })
+    });
+    app.use('/image', StoredImagesRouter());
 
 
     const server = app.listen(port, () => {
