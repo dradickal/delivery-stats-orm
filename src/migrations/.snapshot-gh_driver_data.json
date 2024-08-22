@@ -377,24 +377,34 @@
     },
     {
       "columns": {
-        "filename": {
-          "name": "filename",
-          "type": "varchar(180)",
+        "uuid": {
+          "name": "uuid",
+          "type": "varchar(15)",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "length": 180,
+          "length": 15,
+          "mappedType": "string"
+        },
+        "filename": {
+          "name": "filename",
+          "type": "varchar(30)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 30,
           "mappedType": "string"
         },
         "filepath": {
           "name": "filepath",
-          "type": "varchar(250)",
+          "type": "varchar(100)",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "length": 250,
+          "length": 100,
           "mappedType": "string"
         },
         "associated_date": {
@@ -417,6 +427,16 @@
           "nullable": false,
           "length": null,
           "mappedType": "datetime"
+        },
+        "service_id": {
+          "name": "service_id",
+          "type": "int",
+          "unsigned": true,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "integer"
         },
         "processed_date": {
           "name": "processed_date",
@@ -446,7 +466,7 @@
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
-          "nullable": false,
+          "nullable": true,
           "length": null,
           "mappedType": "json"
         }
@@ -454,9 +474,19 @@
       "name": "stored_images",
       "indexes": [
         {
+          "columnNames": [
+            "service_id"
+          ],
+          "composite": false,
+          "keyName": "stored_images_service_id_index",
+          "constraint": false,
+          "primary": false,
+          "unique": false
+        },
+        {
           "keyName": "PRIMARY",
           "columnNames": [
-            "filename"
+            "uuid"
           ],
           "composite": false,
           "constraint": true,
@@ -465,7 +495,20 @@
         }
       ],
       "checks": [],
-      "foreignKeys": {},
+      "foreignKeys": {
+        "stored_images_service_id_foreign": {
+          "constraintName": "stored_images_service_id_foreign",
+          "columnNames": [
+            "service_id"
+          ],
+          "localTableName": "stored_images",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "service_label",
+          "updateRule": "cascade"
+        }
+      },
       "nativeEnums": {}
     },
     {

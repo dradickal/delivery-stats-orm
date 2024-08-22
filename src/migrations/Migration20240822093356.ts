@@ -1,6 +1,6 @@
 import { Migration } from '@mikro-orm/migrations';
 
-export class Migration20240815074016 extends Migration {
+export class Migration20240822093356 extends Migration {
 
   async up(): Promise<void> {
     this.addSql('create table `activity_label` (`id` int unsigned not null auto_increment primary key, `name` varchar(15) not null, `friendly_name` varchar(40) not null) default character set utf8mb4 engine = InnoDB;');
@@ -17,7 +17,8 @@ export class Migration20240815074016 extends Migration {
 
     this.addSql('create table `service_label` (`id` int unsigned not null auto_increment primary key, `name` varchar(255) not null) default character set utf8mb4 engine = InnoDB;');
 
-    this.addSql('create table `stored_images` (`filename` varchar(180) not null, `filepath` varchar(250) not null, `associated_date` date null default null, `upload_date` datetime not null, `processed_date` datetime null default null, `activity_label` varchar(15) null default null, `ocr_results` json not null, primary key (`filename`)) default character set utf8mb4 engine = InnoDB;');
+    this.addSql('create table `stored_images` (`uuid` varchar(15) not null, `filename` varchar(30) not null, `filepath` varchar(100) not null, `associated_date` date null default null, `upload_date` datetime not null, `service_id` int unsigned not null, `processed_date` datetime null default null, `activity_label` varchar(15) null default null, `ocr_results` json not null, primary key (`uuid`)) default character set utf8mb4 engine = InnoDB;');
+    this.addSql('alter table `stored_images` add index `stored_images_service_id_index`(`service_id`);');
 
     this.addSql('create table `vehicle_stats` (`id` int unsigned not null auto_increment primary key, `miles_driven` numeric(4,2) not null default 0, `mpg` numeric(3,1) not null default 0, `vehicle_duration_m` smallint unsigned not null default 0, `vehicle_active_diff_m` smallint unsigned not null default 0, `vehicle_shift_diff_m` smallint unsigned not null default 0, `gallons_consumed` numeric(3,1) not null default 0, `pay_per_mile` numeric(6,2) not null default 0) default character set utf8mb4 engine = InnoDB;');
 
@@ -48,6 +49,8 @@ export class Migration20240815074016 extends Migration {
     this.addSql('create table `weekday` (`id` int unsigned not null auto_increment primary key, `name` varchar(255) not null, `short_name` varchar(4) not null, `sort_mon` tinyint not null) default character set utf8mb4 engine = InnoDB;');
 
     this.addSql('alter table `offer_drive` add constraint `offer_drive_destination_id_foreign` foreign key (`destination_id`) references `destination` (`id`) on update cascade;');
+
+    this.addSql('alter table `stored_images` add constraint `stored_images_service_id_foreign` foreign key (`service_id`) references `service_label` (`id`) on update cascade;');
 
     this.addSql('alter table `driving_shift` add constraint `driving_shift_vehicle_stats_id_foreign` foreign key (`vehicle_stats_id`) references `vehicle_stats` (`id`) on update cascade;');
     this.addSql('alter table `driving_shift` add constraint `driving_shift_service_id_foreign` foreign key (`service_id`) references `service_label` (`id`) on update cascade;');
