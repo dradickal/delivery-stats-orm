@@ -38,13 +38,13 @@ __decorate([
     Property({ type: MonetaryType, unsigned: true })
 ], OfferOrder.prototype, "basePay", void 0);
 __decorate([
-    Property({ type: MonetaryType, unsigned: true, default: 0 })
+    Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
 ], OfferOrder.prototype, "bonusPay", void 0);
 __decorate([
-    Property({ type: MonetaryType, unsigned: true, default: 0 })
+    Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
 ], OfferOrder.prototype, "appTip", void 0);
 __decorate([
-    Property({ type: MonetaryType, unsigned: true, default: 0 })
+    Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
 ], OfferOrder.prototype, "cashTip", void 0);
 __decorate([
     Property({ type: types.tinyint, unsigned: true, nullable: true, default: null })

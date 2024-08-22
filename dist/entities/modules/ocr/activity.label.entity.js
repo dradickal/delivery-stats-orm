@@ -5,19 +5,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { Entity, Property, types } from '@mikro-orm/core';
-import { LabelEntity } from './label.entity.js';
-let Weekday = class Weekday extends LabelEntity {
-    shortName;
-    sortMon;
+import { LabelEntity } from '../common/label.entity.js';
+let ActivityLabel = class ActivityLabel extends LabelEntity {
+    friendlyName;
 };
 __decorate([
-    Property({ type: types.string, length: 4 })
-], Weekday.prototype, "shortName", void 0);
+    Property({ type: types.string, length: 15, unique: true })
+], ActivityLabel.prototype, "name", void 0);
 __decorate([
-    Property({ type: types.tinyint })
-], Weekday.prototype, "sortMon", void 0);
-Weekday = __decorate([
-    Entity({ readonly: true })
-], Weekday);
-export { Weekday };
+    Property({ type: types.string, length: 40 })
+], ActivityLabel.prototype, "friendlyName", void 0);
+ActivityLabel = __decorate([
+    Entity()
+], ActivityLabel);
+export { ActivityLabel };
 ;

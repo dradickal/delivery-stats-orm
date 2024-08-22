@@ -5,11 +5,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 import { Entity } from '@mikro-orm/core';
-import { LabelEntity } from './label.entity.js';
-let ServiceLabel = class ServiceLabel extends LabelEntity {
+import { LabelEntity } from '../common/label.entity.js';
+let Destination = class Destination extends LabelEntity {
 };
-ServiceLabel = __decorate([
-    Entity({ readonly: true })
-], ServiceLabel);
-export { ServiceLabel };
+Destination = __decorate([
+    Entity()
+], Destination);
+export { Destination };
 ;

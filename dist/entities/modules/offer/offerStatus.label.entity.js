@@ -6,10 +6,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { Entity } from '@mikro-orm/core';
 import { LabelEntity } from '../common/label.entity.js';
-let Destination = class Destination extends LabelEntity {
+let OfferStatus = class OfferStatus extends LabelEntity {
 };
-Destination = __decorate([
-    Entity({ readonly: true })
-], Destination);
-export { Destination };
+OfferStatus = __decorate([
+    Entity()
+], OfferStatus);
+export { OfferStatus };
 ;

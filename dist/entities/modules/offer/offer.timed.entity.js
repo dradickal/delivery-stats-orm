@@ -26,10 +26,10 @@ __decorate([
     Property({ type: types.float, unsigned: true })
 ], Offer.prototype, "offerDistance", void 0);
 __decorate([
-    Property({ type: MonetaryType, unsigned: true, default: 0 })
+    Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
 ], Offer.prototype, "offerPay", void 0);
 __decorate([
-    Property({ type: MonetaryType, unsigned: true, default: 0 })
+    Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
 ], Offer.prototype, "totalPay", void 0);
 __decorate([
     Property({ type: types.boolean, default: false })

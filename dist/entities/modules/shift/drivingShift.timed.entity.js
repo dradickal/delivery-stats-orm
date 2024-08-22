@@ -21,7 +21,7 @@ let DrivingShift = class DrivingShift extends TimedEntity {
     bonusPay;
     customerTip;
     contributionPay;
-    // Override Schema generation that added 'unsigned' after generated statement when defined as reference
+    // Override Schema generation that added 'unsigned' after generated statement when defined as reference.
     weekdayId;
     vehicleStats;
     service;
@@ -33,28 +33,28 @@ __decorate([
     Property({ type: types.date })
 ], DrivingShift.prototype, "date", void 0);
 __decorate([
-    Property({ type: types.smallint, unsigned: true, default: 0, fieldName: 'active_duration_m' })
+    Property({ type: types.smallint, unsigned: true, default: 0, nullable: false, fieldName: 'active_duration_m' })
 ], DrivingShift.prototype, "activeDuration", void 0);
 __decorate([
-    Property({ type: types.smallint, unsigned: true, default: 0, fieldName: 'duration_diff_m' })
+    Property({ type: types.smallint, unsigned: true, default: 0, nullable: false, fieldName: 'active_shift_diff_m' })
 ], DrivingShift.prototype, "durationDiff", void 0);
 __decorate([
-    Property({ type: MonetaryType, unsigned: true, default: 0 })
+    Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
 ], DrivingShift.prototype, "totalPay", void 0);
 __decorate([
-    Property({ type: MonetaryType, unsigned: true, default: 0 })
+    Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
 ], DrivingShift.prototype, "appPay", void 0);
 __decorate([
-    Property({ type: MonetaryType, unsigned: true, default: 0 })
+    Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
 ], DrivingShift.prototype, "bonusPay", void 0);
 __decorate([
-    Property({ type: MonetaryType, unsigned: true, default: 0 })
+    Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
 ], DrivingShift.prototype, "customerTip", void 0);
 __decorate([
-    Property({ type: MonetaryType, unsigned: true, default: 0 })
+    Property({ type: MonetaryType, unsigned: true, default: 0, ignoreSchemaChanges: ['default'] })
 ], DrivingShift.prototype, "contributionPay", void 0);
 __decorate([
-    Property({ columnType: `int unsigned generated always as (DAYOFWEEK(\`date\`)) stored` })
+    Property({ columnType: `int unsigned generated always as (DAYOFWEEK(\`date\`)) stored`, ignoreSchemaChanges: ['type', 'extra'] })
 ], DrivingShift.prototype, "weekdayId", void 0);
 __decorate([
     ManyToOne({ entity: () => VehicleStats, ref: true })
