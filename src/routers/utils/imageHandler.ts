@@ -1,11 +1,12 @@
 import multer from "multer";
+import { nanoid } from "nanoid";
 
 const storage = multer.diskStorage({ 
     destination: './public/uploads/',
     filename: (req, file, cb) => {
             const fileExtPattern = /\.[^.\\/:*?"'<>|\r\n]+$/i;
             const fileExt = file.originalname.match(fileExtPattern)![0];
-            const generatedName = `${Date.now()}-${crypto.getRandomValues(new Uint16Array(1))[0]}${fileExt}`;
+            const generatedName = `${Date.now()}-${nanoid(8)}${fileExt}`;
             console.log('[multer:filename] ', `${file.originalname} -> ${generatedName}`);
             cb(null, generatedName);
     }
