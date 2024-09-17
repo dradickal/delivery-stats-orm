@@ -1,1 +1,1 @@
-export { StoredImagesService, IFile } from './storedImagesService.js';
+export * from './storedImagesService.js';

@@ -6,18 +6,21 @@ export function StoredImagesService(db = getEntityServices()) {
     console.log(`[StoredImagesService] context-specific em-ID: ${em.id || 'TEST'}`);
     async function postStoredImages(formInput) {
         console.log(`[StoredImagesService:postStoredImage] context-specific em-ID: ${em.id || 'TEST'}`);
-        const { files, serviceId, associatedDate } = formInput;
-        const serviceRef = serviceRepository.getReference(serviceId);
+        const { files, serviceId, associatedDate, userDefinedTimes } = formInput;
+        const service = await serviceRepository.findOneOrFail({ id: serviceId });
         for (const file of files) {
             repository.create({
                 filename: file.filename,
                 filepath: file.path,
+                originalName: file.originalname,
+                userDefinedTime: userDefinedTimes[file.originalname],
                 associatedDate,
-                service: serviceRef,
+                service,
             });
         }
+        await em.flush();
         return {
-            method: 'postStoredImage',
+            message: `Successfully stored ${files.length} images.`,
         };
     }
     return {

@@ -9,10 +9,15 @@ export interface IFile {
     filename: string;
     path: string;
 }
+type Time = string;
+type FileName = string;
 interface PostStoredImagesParams {
     files: Array<IFile>;
     serviceId: number;
     associatedDate: Date;
+    userDefinedTimes: {
+        [k: FileName]: Time;
+    };
 }
 export interface IStoredImagesService {
     postStoredImages(formInput: PostStoredImagesParams): Promise<PlainObject>;

@@ -6,36 +6,49 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 import { Entity, ManyToOne, OptionalProps, PrimaryKey, Property, ref, types } from "@mikro-orm/core";
 import { ServiceLabel } from "../common/service.label.entity.js";
+import { customAlphabet } from "nanoid";
+const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+const nanoid = customAlphabet(alphabet, 14);
 let StoredImages = class StoredImages {
     [OptionalProps];
-    uuid;
+    uuid = "id-" + nanoid();
     filename;
     filepath;
+    originalName;
     associatedDate;
+    userDefinedTime;
     uploadDate = new Date();
     service;
     processedDate;
     activityLabel;
     ocrResults;
-    constructor(filename, filepath, associatedDate, service) {
+    constructor(filename, filepath, originalName, associatedDate, userDefinedTime, service) {
         this.filename = filename;
         this.filepath = filepath;
+        this.originalName = originalName;
         this.associatedDate = associatedDate;
+        this.userDefinedTime = userDefinedTime;
         this.service = ref(service);
     }
 };
 __decorate([
-    PrimaryKey({ type: types.bigint, unsigned: true, defaultRaw: 'UUID_SHORT()' })
+    PrimaryKey({ type: types.string, length: 17 })
 ], StoredImages.prototype, "uuid", void 0);
 __decorate([
-    Property({ type: types.string, length: 180 })
+    Property({ type: types.string, length: 50 })
 ], StoredImages.prototype, "filename", void 0);
 __decorate([
-    Property({ type: types.string, length: 250 })
+    Property({ type: types.string, length: 120 })
 ], StoredImages.prototype, "filepath", void 0);
+__decorate([
+    Property({ type: types.string, length: 50 })
+], StoredImages.prototype, "originalName", void 0);
 __decorate([
     Property({ type: types.date, nullable: true, default: null })
 ], StoredImages.prototype, "associatedDate", void 0);
+__decorate([
+    Property({ type: types.time, nullable: true, default: null })
+], StoredImages.prototype, "userDefinedTime", void 0);
 __decorate([
     Property({ type: types.datetime })
 ], StoredImages.prototype, "uploadDate", void 0);
@@ -49,7 +62,7 @@ __decorate([
     Property({ type: types.string, length: 15, nullable: true, default: null })
 ], StoredImages.prototype, "activityLabel", void 0);
 __decorate([
-    Property({ type: types.json, default: "{}" })
+    Property({ type: types.json, nullable: true })
 ], StoredImages.prototype, "ocrResults", void 0);
 StoredImages = __decorate([
     Entity()
