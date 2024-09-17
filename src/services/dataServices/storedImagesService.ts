@@ -12,10 +12,14 @@ export interface IFile {
     path: string;
   }
 
+  type Time = string;
+  type FileName = string;
+
 interface PostStoredImagesParams {
     files: Array<IFile>,
     serviceId: number,
     associatedDate: Date,
+    userDefinedTimes: {[k: FileName]: Time}
 }
 
 export interface IStoredImagesService {
@@ -32,12 +36,14 @@ export function StoredImagesService (db = getEntityServices()): IStoredImagesSer
     async function postStoredImages(formInput:PostStoredImagesParams):Promise<PlainObject> {
         console.log(`[StoredImagesService:postStoredImage] context-specific em-ID: ${em.id || 'TEST'}`);
         
-        const {files, serviceId, associatedDate} = formInput;
+        const {files, serviceId, associatedDate, userDefinedTimes} = formInput;
         const service = await serviceRepository.findOneOrFail({ id: serviceId });
         for (const file of files) {
             repository.create({
                 filename: file.filename, 
                 filepath: file.path, 
+                originalName: file.originalname,
+                userDefinedTime: userDefinedTimes[file.originalname],
                 associatedDate, 
                 service,
             });

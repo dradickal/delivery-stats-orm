@@ -379,32 +379,42 @@
       "columns": {
         "uuid": {
           "name": "uuid",
-          "type": "varchar(15)",
+          "type": "varchar(17)",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "length": 15,
+          "length": 17,
           "mappedType": "string"
         },
         "filename": {
           "name": "filename",
-          "type": "varchar(30)",
+          "type": "varchar(50)",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "length": 30,
+          "length": 50,
           "mappedType": "string"
         },
         "filepath": {
           "name": "filepath",
-          "type": "varchar(100)",
+          "type": "varchar(120)",
           "unsigned": false,
           "autoincrement": false,
           "primary": false,
           "nullable": false,
-          "length": 100,
+          "length": 120,
+          "mappedType": "string"
+        },
+        "original_name": {
+          "name": "original_name",
+          "type": "varchar(50)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 50,
           "mappedType": "string"
         },
         "associated_date": {
@@ -417,6 +427,17 @@
           "length": null,
           "default": "null",
           "mappedType": "date"
+        },
+        "user_defined_time": {
+          "name": "user_defined_time",
+          "type": "time",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": null,
+          "default": "null",
+          "mappedType": "time"
         },
         "upload_date": {
           "name": "upload_date",

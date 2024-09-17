@@ -13,8 +13,13 @@ export function StoredImagesRouter(imageService = StoredImagesService()): Router
             
             const files = req.files as IFile[];
 
-            const { serviceId, associatedDate } = req.body;
-            const data = await imageService.postStoredImages({ files, serviceId, associatedDate });
+            const { serviceId, associatedDate, userDefinedTimes	} = req.body;
+            const data = await imageService.postStoredImages({ 
+                files, 
+                serviceId, 
+                associatedDate,
+                userDefinedTimes: JSON.parse(userDefinedTimes),
+            });
             
             const body = dummyBody(req, data);
 
