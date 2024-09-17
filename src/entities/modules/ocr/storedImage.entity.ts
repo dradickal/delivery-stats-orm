@@ -20,10 +20,10 @@ export class StoredImages {
     @Property({ type: types.string, length: 120 })
     filepath: string;
 
-    @Property({ type: types.string, length: 50})
+    @Property({ type: types.string, length: 50, unique: true })
     originalName: string;
 
-    @Property({ type: types.date, nullable: true, default: null })
+    @Property({ type: types.date, nullable: true, default: null, index: true })
     associatedDate: Date | null;
 
     @Property({ type: types.time, nullable: true, default: null })
