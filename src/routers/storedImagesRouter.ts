@@ -2,6 +2,7 @@ import { Router } from "express";
 import { StoredImagesService, IFile } from "../services/dataServices/index.js";
 import { multiImagePost } from "./utils/imageHandler.js";
 import { dummyBody } from "./utils/dummyBody.js";
+import { UniqueConstraintViolationException } from "@mikro-orm/mysql";
 
 
 export function StoredImagesRouter(imageService = StoredImagesService()): Router {
@@ -26,7 +27,19 @@ export function StoredImagesRouter(imageService = StoredImagesService()): Router
             res.status(200).json(body);
         } catch (error) {
             console.log(error);
-            next(error);
+            if(error instanceof UniqueConstraintViolationException) {
+                const msg = error.sqlMessage as string;
+                const file = msg.match(/Duplicate entry '(?<name>[\w_\-\.]+)'/i)
+                res.status(400).json({
+                    code: error.code,
+                    message: 'A duplicate file was included in the upload.',
+                    data: {
+                        fileName: file?.groups?.name || 'unknown',
+                    }
+                });
+            } else {
+                next(error);
+            }
         }
     });
 
