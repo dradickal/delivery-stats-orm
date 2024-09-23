@@ -10,7 +10,7 @@ export function StoredImagesRouter(imageService = StoredImagesService()): Router
 
     router.post('/upload', multiImagePost('images'), async (req, res, next) => {
         try {
-            console.log('[POST /upload]', req.files);
+            console.log('[POST /image/upload]', req.files);
             
             const files = req.files as IFile[];
 
@@ -43,5 +43,17 @@ export function StoredImagesRouter(imageService = StoredImagesService()): Router
         }
     });
 
+    router.get('/stored', async (req, res, next) => {
+        const { processed = false } = req.query;
+        try {
+            console.log('[GET image/stored]', req.query);
+            res.status(200).json({
+                message: '/images/stored',
+                processed
+            })
+        } catch (error) {
+            next(error);
+        }
+    });
     return router;
 }
