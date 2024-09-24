@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 
 import { createRequestContext } from './db.js';
 import { ErrorHandler } from './routers/utils/errorHandler.js';
-import { StoredImagesRouter } from './routers/storedImagesRouter.js';
+import { ActivityImagesRouter } from './routers/activityImagesRouter.js';
 
 export async function bootstrap(port?:number|string) {
     const app = express();
@@ -26,7 +26,7 @@ export async function bootstrap(port?:number|string) {
             data: {}
         });
     });
-    app.use('/image', StoredImagesRouter());
+    app.use('/activity', ActivityImagesRouter());
 
     app.use(ErrorHandler);
 

@@ -2,7 +2,7 @@ export * from "./modules/business/business.entity.js";
 export * from "./modules/common/service.label.entity.js";
 export * from "./modules/common/weekday.label.entity.js";
 export * from "./modules/ocr/activity.label.entity.js";
-export * from "./modules/ocr/storedImage.entity.js";
+export * from "./modules/ocr/activityImage.entity.js";
 export * from "./modules/offer/destination.label.entity.js";
 export * from "./modules/offer/offer.timed.entity.js";
 export * from "./modules/offer/offerDrive.timed.entity.js";

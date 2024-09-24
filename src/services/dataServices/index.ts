@@ -1,1 +1,1 @@
-export * from './storedImagesService.js';
+export * from './activityImagesService.js';

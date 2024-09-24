@@ -1,15 +1,19 @@
-import { Entity, ManyToOne, Opt, OptionalProps, PrimaryKey, Property, ref, Ref, types } from "@mikro-orm/core";
+import { Entity, EntityRepositoryType, Filter, ManyToOne, Opt, OptionalProps, PrimaryKey, Property, ref, Ref, types } from "@mikro-orm/core";
 import { ServiceLabel } from "../common/service.label.entity.js";
 import { customAlphabet } from "nanoid";
+import { ActivityImageRepository } from "./activityImage.repository.js";
 
 const alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
 const nanoid = customAlphabet(alphabet, 14);
 
 
 
-@Entity()
-export class StoredImages {
+@Entity({ repository: () => ActivityImageRepository })
+@Filter({ name: 'waitingOCR', cond: { processedDate: { $eq: null } } })
+@Filter({ name: 'isProcessed', cond: { processedDate: { $ne: null } } })
+export class ActivityImage {
     [OptionalProps]?: 'uploadDate' | 'processedDate' | 'activityLabel' | 'ocrResults';
+    [EntityRepositoryType]?: ActivityImageRepository;
 
     @PrimaryKey({ type: types.string, length: 17 })
     uuid = "id-" + nanoid();

@@ -1,21 +1,21 @@
 import { Router } from "express";
-import { StoredImagesService, IFile } from "../services/dataServices/index.js";
+import { ActivityImagesService, IFile, GetActivityImagesParams } from "../services/dataServices/index.js";
 import { multiImagePost } from "./utils/imageHandler.js";
 import { dummyBody } from "./utils/dummyBody.js";
 import { UniqueConstraintViolationException } from "@mikro-orm/mysql";
 
 
-export function StoredImagesRouter(imageService = StoredImagesService()): Router {
+export function ActivityImagesRouter(imageService = ActivityImagesService()): Router {
     const router = Router();
 
     router.post('/upload', multiImagePost('images'), async (req, res, next) => {
         try {
-            console.log('[POST /image/upload]', req.files);
+            console.log('[POST /activity/upload]', req.files);
             
             const files = req.files as IFile[];
 
             const { serviceId, associatedDate, userDefinedTimes	} = req.body;
-            const data = await imageService.postStoredImages({ 
+            const data = await imageService.postActivityImages({ 
                 files, 
                 serviceId, 
                 associatedDate,
@@ -44,12 +44,13 @@ export function StoredImagesRouter(imageService = StoredImagesService()): Router
     });
 
     router.get('/stored', async (req, res, next) => {
-        const { processed = false } = req.query;
+        const queries = req.query as unknown as GetActivityImagesParams;
+        const data = await imageService.getActivityImages(queries)
         try {
             console.log('[GET image/stored]', req.query);
             res.status(200).json({
-                message: '/images/stored',
-                processed
+                message: '/image/stored',
+                images: data
             })
         } catch (error) {
             next(error);
