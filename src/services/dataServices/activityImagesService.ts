@@ -32,11 +32,12 @@ export type GetActivityImagesParams = {
 export interface IActivityImagesService {
     postActivityImages(formInput: PostActivityImagesParams): Promise<PlainObject>,
     getActivityImages(queries: GetActivityImagesParams): Promise<PlainObject>,
+    getActivityDates():Promise<PlainObject>,
 }
 
 export function ActivityImagesService (db = getEntityServices()): IActivityImagesService {
     const em = db.entityManager;
-    const repository = db.storedImage;
+    const repository = db.activityImage;
     const serviceRepository = db.service;
 
     console.log(`[ActivityImagesService] context-specific em-ID: ${em.id || 'TEST'}`);
@@ -77,8 +78,13 @@ export function ActivityImagesService (db = getEntityServices()): IActivityImage
         return repository.find(where, { filters });
     }
 
+    async function getActivityDates() {
+        return repository.listActivityDates({}, {});
+    }
+
     return {
         postActivityImages,
         getActivityImages,
+        getActivityDates,
     }
 }

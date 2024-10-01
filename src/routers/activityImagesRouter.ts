@@ -56,5 +56,15 @@ export function ActivityImagesRouter(imageService = ActivityImagesService()): Ro
             next(error);
         }
     });
+
+    router.get('/date', async (req, res, next) => {
+        const data = await imageService.getActivityDates();
+        res.status(200).json({
+            message: 'success',
+            data: {
+                activityDates: data,
+            }
+        })
+    })
     return router;
 }

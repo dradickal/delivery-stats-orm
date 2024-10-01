@@ -1,5 +1,5 @@
 
-import { Entity, EntityManager, Property } from '@mikro-orm/core';
+import { Entity, EntityManager, Property, types } from '@mikro-orm/core';
 import { ActivityImage } from './activityImage.entity.js';
 
 
@@ -14,12 +14,20 @@ export class ActivityDate {
   serviceId!: number;
 
   @Property()
-  date!: Date;
+  date!: string;
 
-  @Property()
-  activityImages?: [ActivityImage];
+  @Property({ type: types.integer })
+  processed!: number;
 
-  @Property()
-  activityCount!: number;
-  
+  @Property({ type: types.integer })
+  waiting!: number;
+
+  toJSON() {
+    return {
+      "serviceId": this.serviceId,
+      "date": this.date,
+      "processed": Number(this.processed),
+      "waiting": Number(this.waiting),
+    }
+  }
 }

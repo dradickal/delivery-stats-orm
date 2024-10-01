@@ -7,12 +7,13 @@ import {
   } from "@mikro-orm/mysql";
 import config from "./mikro-orm.config.js";
 import { RequestHandler } from "express";
-import { Business, ServiceLabel, StoredImages } from "./entities/index.js";
+import { Business, ServiceLabel, ActivityImage } from "./entities/index.js";
+import { ActivityImageRepository } from "./entities/modules/ocr/activityImage.repository.js";
 
   
 export interface EntityServices {
     entityManager: EntityManager;
-    storedImage: EntityRepository<StoredImages>;
+    activityImage: ActivityImageRepository;
     business: EntityRepository<Business>;
     service: EntityRepository<ServiceLabel>;
 }
@@ -34,7 +35,7 @@ export async function initORM(options?: Options): Promise<EntityServices> {
 
     return (cache = {
         entityManager: ormCache.em,
-        storedImage: ormCache.em.getRepository(StoredImages),
+        activityImage: ormCache.em.getRepository(ActivityImage),
         business: ormCache.em.getRepository(Business),
         service: ormCache.em.getRepository(ServiceLabel),
     });

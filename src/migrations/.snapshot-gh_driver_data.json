@@ -492,14 +492,14 @@
           "mappedType": "json"
         }
       },
-      "name": "stored_images",
+      "name": "activity_image",
       "indexes": [
         {
           "columnNames": [
             "original_name"
           ],
           "composite": false,
-          "keyName": "stored_images_original_name_unique",
+          "keyName": "activity_image_original_name_unique",
           "constraint": true,
           "primary": false,
           "unique": true
@@ -509,7 +509,7 @@
             "associated_date"
           ],
           "composite": false,
-          "keyName": "stored_images_associated_date_index",
+          "keyName": "activity_image_associated_date_index",
           "constraint": false,
           "primary": false,
           "unique": false
@@ -519,7 +519,7 @@
             "service_id"
           ],
           "composite": false,
-          "keyName": "stored_images_service_id_index",
+          "keyName": "activity_image_service_id_index",
           "constraint": false,
           "primary": false,
           "unique": false
@@ -537,12 +537,12 @@
       ],
       "checks": [],
       "foreignKeys": {
-        "stored_images_service_id_foreign": {
-          "constraintName": "stored_images_service_id_foreign",
+        "activity_image_service_id_foreign": {
+          "constraintName": "activity_image_service_id_foreign",
           "columnNames": [
             "service_id"
           ],
-          "localTableName": "stored_images",
+          "localTableName": "activity_image",
           "referencedColumnNames": [
             "id"
           ],
