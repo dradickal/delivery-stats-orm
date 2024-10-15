@@ -26,7 +26,7 @@ type PostActivityImagesParams = {
 export type GetActivityImagesParams = {
     serviceId: number,
     processed: boolean,
-    associatedDate?: Date,
+    associatedDate: Date,
 }
 
 export interface IActivityImagesService {
@@ -68,6 +68,7 @@ export function ActivityImagesService (db = getEntityServices()): IActivityImage
         console.log(`[ActivityImagesService:getActivityImage] context-specific em-ID: ${em.id || 'TEST'}`);
         const where = {
             service: queries.serviceId,
+            associatedDate: queries.associatedDate,
         };
 
         const filters = {

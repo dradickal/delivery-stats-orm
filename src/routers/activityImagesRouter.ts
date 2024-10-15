@@ -3,6 +3,7 @@ import { spawn } from "node:child_process";
 import { ActivityImagesService, IFile, GetActivityImagesParams } from "../services/dataServices/index.js";
 import { multiImagePost } from "./utils/imageHandler.js";
 import { dummyBody } from "./utils/dummyBody.js";
+import { ServiceDict } from "./utils/ServiceDict.js";
 import { UniqueConstraintViolationException } from "@mikro-orm/mysql";
 
 
@@ -68,11 +69,18 @@ export function ActivityImagesRouter(imageService = ActivityImagesService()): Ro
         })
     })
 
-    router.post('/ocr', async (req, res, next) => {
+    router.get('/ocr', async (req, res, next) => {
+        const { service, date, processed } = req.query;
+        const params: GetActivityImagesParams  = {
+            serviceId: ServiceDict.get(service as string) as number,
+            associatedDate: new Date(date as string),
+            processed: processed === 'true', 
+        };
+        const data = await imageService.getActivityImages(params)
         res.status(200).json({
             message: 'success',
             data: {
-
+                activityImages: data,
             }
         })
     })
