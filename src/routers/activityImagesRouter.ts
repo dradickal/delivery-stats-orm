@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { spawn } from "node:child_process";
 import { ActivityImagesService, IFile, GetActivityImagesParams } from "../services/dataServices/index.js";
 import { multiImagePost } from "./utils/imageHandler.js";
 import { dummyBody } from "./utils/dummyBody.js";
@@ -57,12 +58,21 @@ export function ActivityImagesRouter(imageService = ActivityImagesService()): Ro
         }
     });
 
-    router.get('/date', async (req, res, next) => {
+    router.get('/ate', async (req, res, next) => {
         const data = await imageService.getActivityDates();
         res.status(200).json({
             message: 'success',
             data: {
                 activityDates: data,
+            }
+        })
+    })
+
+    router.post('/ocr', async (req, res, next) => {
+        res.status(200).json({
+            message: 'success',
+            data: {
+
             }
         })
     })
