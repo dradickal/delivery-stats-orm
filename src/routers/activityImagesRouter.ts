@@ -7,6 +7,7 @@ import { ServiceDict } from "./utils/ServiceDict.js";
 import { UniqueConstraintViolationException } from "@mikro-orm/mysql";
 
 
+
 export function ActivityImagesRouter(imageService = ActivityImagesService()): Router {
     const router = Router();
 
@@ -82,11 +83,26 @@ export function ActivityImagesRouter(imageService = ActivityImagesService()): Ro
                 associatedDate: new Date(date as string),
                 processed: processed === 'true', 
             };
-            const data = await imageService.getActivityImages(params)
+            const images = await imageService.getActivityImages(params);
+
+            images.forEach(image => {
+                let ocrResponse:string;
+                const python = spawn('python', ['script.py', image.filepath]);
+                // collect data from script
+                python.stdout.on('data', function (data) {
+                    console.log('Pipe data from python script ...');
+                    ocrResponse = data.toString();
+                });
+                // in close event we are sure that stream from child process is closed
+                python.on('close', (code) => {
+                    console.log(`child process close all stdio with code ${code}`);
+                });
+            });            
+
             res.status(200).json({
                 message: 'success',
                 data: {
-                    activityImages: data,
+                    activityImages: images,
                 }
             });
         } catch (error) {

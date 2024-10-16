@@ -1,5 +1,4 @@
 import re
-import json
 
 activityMap = {
     "navigate": {
@@ -98,7 +97,6 @@ def matchText(imageText, matchTerms):
             result = any(matches)
             matchResults.append(result)
         else:
-            print("-- Searching for term: ", term)
             result = re.search(term, imageText, re.IGNORECASE)
             matchResults.append(result)
             if result:
@@ -106,31 +104,16 @@ def matchText(imageText, matchTerms):
     
     return matchResults 
 
-def matchActivity(imageText):
+# textList string[]
+def matchActivity(textList):
+    imageText = ','.join(textList)
+
     label=None
     activity = iter(activityMap.items())
     for current in activity:
-        print("Looking for match in ", current[0])
         matches = matchText(imageText, current[1]["match"])
-        print("-- Match Results: ", matches)
         if (all(matches)):
             label = current[0]
             break
     
     return label
-
-# keys = activityMap.keys()
-# for key in keys:
-#     print('("{}"),'.format(key))
-
-with open('../output/earnings-page.json', 'r') as f:
-    data = json.load(f)
-
-textList = [o["text"] for o in data["output"]]
-imageText = ','.join(textList)
-
-print(imageText)
-
-label = matchActivity(imageText)
-
-print("The matched label is:", label)

@@ -1,6 +1,7 @@
 import { isPromise } from "util/types";
 import { getEntityServices } from "../../db.js";
-import { PlainObject, ref } from "@mikro-orm/core";
+import { Loaded, PlainObject, ref } from "@mikro-orm/core";
+import { ActivityImage } from "../../entities/index.js";
 
 export interface IFile {
     fieldname: string;
@@ -31,7 +32,7 @@ export type GetActivityImagesParams = {
 
 export interface IActivityImagesService {
     postActivityImages(formInput: PostActivityImagesParams): Promise<PlainObject>,
-    getActivityImages(queries: GetActivityImagesParams): Promise<PlainObject>,
+    getActivityImages(queries: GetActivityImagesParams): Promise<Loaded<ActivityImage>[]>,
     getActivityDates():Promise<PlainObject>,
 }
 
@@ -64,7 +65,7 @@ export function ActivityImagesService (db = getEntityServices()): IActivityImage
         };
     }
 
-    async function getActivityImages(queries: GetActivityImagesParams): Promise<PlainObject> {
+    async function getActivityImages(queries: GetActivityImagesParams): Promise<Loaded<ActivityImage>[]> {
         console.log(`[ActivityImagesService:getActivityImage] context-specific em-ID: ${em.id || 'TEST'}`);
         const where = {
             service: queries.serviceId,
