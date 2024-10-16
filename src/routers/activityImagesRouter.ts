@@ -46,43 +46,53 @@ export function ActivityImagesRouter(imageService = ActivityImagesService()): Ro
     });
 
     router.get('/stored', async (req, res, next) => {
-        const queries = req.query as unknown as GetActivityImagesParams;
-        const data = await imageService.getActivityImages(queries)
         try {
+            const queries = req.query as unknown as GetActivityImagesParams;
+            const data = await imageService.getActivityImages(queries)
             console.log('[GET image/stored]', req.query);
             res.status(200).json({
                 message: '/image/stored',
                 images: data
-            })
+            });
         } catch (error) {
             next(error);
         }
     });
 
-    router.get('/ate', async (req, res, next) => {
-        const data = await imageService.getActivityDates();
-        res.status(200).json({
-            message: 'success',
-            data: {
-                activityDates: data,
-            }
-        })
-    })
+    router.get('/date', async (req, res, next) => {
+        try {
+            const data = await imageService.getActivityDates();
+            res.status(200).json({
+                message: 'success',
+                data: {
+                    activityDates: data,
+                }
+            });
+        } catch (error) {
+            next(error);
+        }
+    
+    });
 
     router.get('/ocr', async (req, res, next) => {
-        const { service, date, processed } = req.query;
-        const params: GetActivityImagesParams  = {
-            serviceId: ServiceDict.get(service as string) as number,
-            associatedDate: new Date(date as string),
-            processed: processed === 'true', 
-        };
-        const data = await imageService.getActivityImages(params)
-        res.status(200).json({
-            message: 'success',
-            data: {
-                activityImages: data,
-            }
-        })
-    })
+        try {
+            const { service, date, processed } = req.query;
+            const params: GetActivityImagesParams  = {
+                serviceId: ServiceDict.get(service as string) as number,
+                associatedDate: new Date(date as string),
+                processed: processed === 'true', 
+            };
+            const data = await imageService.getActivityImages(params)
+            res.status(200).json({
+                message: 'success',
+                data: {
+                    activityImages: data,
+                }
+            });
+        } catch (error) {
+            next(error);
+        }
+    });
+
     return router;
 }
