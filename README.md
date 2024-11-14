@@ -1,4 +1,10 @@
-# Setting up Local Envirionment
+# Delivery Stats ORM
+
+Frontend Repository: https://github.com/dradickal/delivery-stats-frontend
+
+This is the database and API repository for the Delivery Stats web app.
+
+## Setting up Local Envirionment
 Migrations are set up with the Mikro-ORM library. To create the database in your environment run the following command. It is labeled as `danger` because the library method being used will drop the existing database that matches `dbName` in the config. If ran in an existing environment all local data will be lost. 
 
 ```$ npm run db-migration-danger-fresh```
