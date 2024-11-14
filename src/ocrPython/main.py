@@ -1,26 +1,29 @@
-import argparse
+import sys
 import json
 from ocr.readImage import processImage, TextMatchEncoder
 from ocr.activityMatch import matchActivity
 
-ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--image", required=True)
+def main(filepath):
+    try:
+        filename = filepath.split('/')[-1]
+        ocrResults, textList = processImage(filepath)
+        label = matchActivity(textList)
 
-args = vars(ap.parse_args())
-filename = args["image"]
+        jsonData = {
+            'filename': filename,
+            'imageText': ocrResults,
+            'label': label,
+        }
 
-ocrResults = processImage(filename)
+        print(json.dumps(jsonData, cls=TextMatchEncoder))
+    except Exception as e:
+        sys.exit(1)
 
-textList = [o["text"] for o in ocrResults]
-label = matchActivity(textList)
+if __name__ == '__main__':
+    filepath = sys.argv[1]
+    main(filepath)
+    sys.exit(0)
 
-jsonData = {
-    'filename': filename,
-    'imageText': ocrResults,
-    'label': label,
-}
-
-print(json.dumps(jsonData, cls=TextMatchEncoder))
 
 
 

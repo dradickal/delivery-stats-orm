@@ -30,6 +30,7 @@ def processImage(filename):
     results = reader.readtext(image, width_ths=1.0, ycenter_ths=0.8, height_ths=0.8, slope_ths=1.0)
     
     output = []
+    textList = []
     for (bbox, text, prob) in results:
         # unpack the bounding box
         (tl, tr, br, bl) = bbox
@@ -39,5 +40,6 @@ def processImage(filename):
         bl = (int(bl[0]), int(bl[1]))
         
         output.append(TextMatch(prob, text, [tl, tr, br, bl]))
+        textList.append(text)
     
-    return output
+    return (output, textList)
